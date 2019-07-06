@@ -1,0 +1,24 @@
+# macOSX
+.DS_Store
+
+# Emacs
+*~
+.\#*
+\#*\#
+transient/*
+
+# Vim Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# IntelliJ
+.idea/
+
+# Archive
+*.tar.gz
+
+# Ansible
+*.retry
