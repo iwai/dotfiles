@@ -346,6 +346,8 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  (exec-path-from-shell-copy-envs '("PATH" "WD_ROOT"))
+
   (define-key evil-emacs-state-map (kbd "C-h") (kbd "<DEL>"))
   (when (display-graphic-p)
     (setq powerline-default-separator 'arrow)
