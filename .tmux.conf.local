@@ -294,6 +294,16 @@ unbind _
 bind - split-window -v
 bind | split-window -h
 
+unbind ,
+bind , select-pane -t :.+
+unbind y
+bind y paste-buffer
+
+bind -n S-Left select-pane -L
+bind -n S-Down select-pane -D
+bind -n S-Up select-pane -U
+bind -n S-Right select-pane -R
+
 # -- oh-my-tmux variables --------------
 #tmux_conf_theme_24b_colour=true
 #tmux_conf_theme_pane_border_style=fat
@@ -307,4 +317,4 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 
 tmux_conf_theme_status_left=' ❐ #S | #{username}#{root}＠#{hostname} '
 
-tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} | #{loadavg} |#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{hostname}%b/%d %R#{?battery_status,#{battery_status},}#{?battery_hbar, #{battery_hbar},}#{?battery_percentage, #{battery_percentage},} '
+tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} | #{loadavg} |#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{hostname} %Y/%m/%d %a %R#{?battery_status,#{battery_status},}#{?battery_hbar, #{battery_hbar},}#{?battery_percentage, #{battery_percentage},} '
