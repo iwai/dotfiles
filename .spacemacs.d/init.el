@@ -348,7 +348,11 @@ you should place your code here."
 
   (exec-path-from-shell-copy-envs '("PATH" "WD_ROOT"))
 
+  ;; http://malkalech.com/emacs_c-h_backspace
   (define-key evil-emacs-state-map (kbd "C-h") (kbd "<DEL>"))
+  ;;(define-key key-translation-map [?\C-h] [?\C-?])
+  ;;(bind-key* "C-h" 'delete-backward-char)
+
   (when (display-graphic-p)
     (setq powerline-default-separator 'arrow)
     ;; https://memo.sugyan.com/entry/20120228/1330392943
