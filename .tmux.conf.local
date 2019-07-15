@@ -296,8 +296,15 @@ bind | split-window -h
 
 unbind ,
 bind , select-pane -t :.+
+
 unbind y
 bind y paste-buffer
+
+unbind -T copy-mode C-w
+if -b 'command -v pbcopy > /dev/null 2>&1' \
+  'bind -T copy-mode C-w send-keys -X copy-selection-and-cancel \; run-shell "sleep 0.1" \; run-shell -b "tmux save-buffer - | pbcopy" '
+
+bind 0 kill-pane
 
 bind -n S-Left select-pane -L
 bind -n S-Down select-pane -D
