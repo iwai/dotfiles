@@ -39,6 +39,7 @@ values."
      yaml
      ruby
      php
+     go
 
      docker
      ;; ----------------------------------------------------------------
@@ -53,9 +54,9 @@ values."
      git
      ;; markdown
      ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     (shell :variables
+            shell-default-shell 'ansi-term
+            shell-default-term-shell "/usr/local/bin/fish")
      ;; spell-checking
      ;; version-control
      )
@@ -331,10 +332,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
           ))
   (add-hook 'spacemacs-editing-style-hook 'dotspacemacs//mac-command-key-to-meta)
 
+  (exec-path-from-shell-copy-envs '("PATH" "WD_ROOT"))
+
   ;; start error from commandline
   ;; https://github.com/syl20bnr/spacemacs/issues/4755#issuecomment-292760094
-  ;; (setq explicit-shell-file-name "/bin/bash")
-  ;; (setq shell-file-name "bash")
+  ;; (setq explicit-shell-file-name "/usr/local/bin/fish")
+  ;; (setq shell-file-name "fish")
 
   )
 
@@ -345,8 +348,6 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-
-  (exec-path-from-shell-copy-envs '("PATH" "WD_ROOT"))
 
   ;; http://malkalech.com/emacs_c-h_backspace
   (define-key evil-emacs-state-map (kbd "C-h") (kbd "<DEL>"))
@@ -365,6 +366,17 @@ you should place your code here."
   (setq yas-snippet-dirs
         '("~/.spacemacs.d/snippets"))
 
+  ;; ansi-term での文字化け解消
+  ;; https://qiita.com/eggc/items/682be005fcd4106bd9c0
+  (setenv "LANG" "ja_JP.UTF-8")
+  (add-hook 'term-mode-hook 'toggle-truncate-lines)
+  ;;(setq term-default-bg-color "#1c1c1c")
+  ;; (setq system-uses-terminfo nil)
+  ;; (setq ansi-color-names-vector
+  ;;       ["black" "tomato" "PaleGreen2" "gold1"
+  ;;        "DeepSkyBlue1" "MediumOrchid1" "cyan" "white"])
+  ;; (setq ansi-color-map (ansi-color-make-color-map))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -376,7 +388,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flycheck-pos-tip pos-tip flycheck web-mode tagedit slim-mode scss-mode sass-mode pug-mode haml-mode emmet-mode company-web web-completion-data yaml-mode persistent-scratch vimrc-mode dactyl-mode robe bundler insert-shebang fish-mode company-shell rvm ruby-tools ruby-test-mode rubocop rspec-mode rbenv rake minitest chruby inf-ruby dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode smeargle orgit magit-gitflow magit-popup gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit transient git-commit with-editor company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))))
+    (xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help go-guru go-eldoc company-go go-mode flycheck-pos-tip pos-tip flycheck web-mode tagedit slim-mode scss-mode sass-mode pug-mode haml-mode emmet-mode company-web web-completion-data yaml-mode persistent-scratch vimrc-mode dactyl-mode robe bundler insert-shebang fish-mode company-shell rvm ruby-tools ruby-test-mode rubocop rspec-mode rbenv rake minitest chruby inf-ruby dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode smeargle orgit magit-gitflow magit-popup gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit transient git-commit with-editor company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
