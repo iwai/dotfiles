@@ -28,13 +28,18 @@ for dotfile in .*; do
     esac
 done
 
+echo Load environment
+source $HOME/.profile
+
 OS=$(uname -s)
 
 if [ -e ${SCRIPTS_DIR}/$OS.sh ]; then
     ${SCRIPTS_DIR}/$OS.sh
 fi
 
-echo Initial load spacemacs
-emacs --batch -l ~/.emacs.d/init.el 2> emacs-init.log
+curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+fish -c "fisher add < ${XDG_CONFIG_HOME}/fish/fishfile"
 
-# osascript -e 'tell application "Finder" to make alias file to POSIX file "/Applications/Xcode.app/Contents/Applications/OpenGL ES Performance Detective.app" at POSIX file "/Users/mylogin/Applications"'
+echo Initial load spacemacs
+emacs --batch -l ~/.emacs.d/init.el 2>> setup.log
+

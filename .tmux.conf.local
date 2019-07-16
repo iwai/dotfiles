@@ -282,8 +282,11 @@ unbind C-a
 
 set -g mouse on
 set -g history-limit 10000
-
 set -g display-time 2300
+
+# disable clear-history
+unbind -T root C-l
+
 
 unbind r
 bind r source-file ~/.tmux.conf \; display "Reloaded!"

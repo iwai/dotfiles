@@ -1,3 +1,13 @@
 ._backup/
 
+.config/fish/functions/
+.config/fish/completions/
+.config/fish/conf.d/
+.config/fish/fish_variables
+.config/fisher/
+
 .config/git/config.local
+.config/hub
+
+.config/direnv/allow/
+.config/anyenv/

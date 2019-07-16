@@ -2,18 +2,34 @@
 tap "iwai/tap"
 cask "iwai/tap/font-ricty-diminished-nerd-font"
 
-
+# cli tools
 brew "fish"
-brew "anyenv"
-brew "git-secrets"
-brew "hub"
-# brew "pandoc"
+brew "tmux"
 brew "peco"
 brew "tree"
-# brew "zlib"
+brew "z"
 
+brew "hub"
+brew "git-secrets"
+
+brew "anyenv"
+brew "direnv"
+
+brew "golangci/tap/golangci-lint"
+
+# brew "zlib"
+# brew "pandoc"
+
+tap "jesseduffield/lazydocker"
+brew "lazydocker"
+
+# spacemacs
 tap "d12frosted/emacs-plus"
 brew "d12frosted/emacs-plus/emacs-plus"
 
+cask "vagrant"
+cask "virtualbox"
+cask "docker"
 
+cask "gpg-suite"
 cask "google-backup-and-sync"
