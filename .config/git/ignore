@@ -22,3 +22,6 @@ transient/*
 
 # Ansible
 *.retry
+
+# direnv
+.envrc
