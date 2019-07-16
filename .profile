@@ -7,5 +7,10 @@ export PATH=/usr/local/sbin:$PATH
 
 export VIMINIT=":source ${XDG_CONFIG_HOME}"/vim/vimrc
 export LESSHISTFILE=/dev/null
+export LESS='-i -M -R'
+
+export EDITOR=vi
+export PAGER=less
+
 
 export WD_ROOT=~/Workspace
