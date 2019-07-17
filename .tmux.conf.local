@@ -280,6 +280,7 @@ bind C-t send-prefix
 set -gu prefix2
 unbind C-a
 
+# set-window-option -g mode-keys emacs
 set -g mouse on
 set -g history-limit 10000
 set -g display-time 2300
@@ -308,11 +309,26 @@ if -b 'command -v pbcopy > /dev/null 2>&1' \
   'bind -T copy-mode C-w send-keys -X copy-selection-and-cancel \; run-shell "sleep 0.1" \; run-shell -b "tmux save-buffer - | pbcopy" '
 
 bind 0 kill-pane
+unbind k
+bind -r k kill-pane
 
 bind -n S-Left select-pane -L
 bind -n S-Down select-pane -D
 bind -n S-Up select-pane -U
 bind -n S-Right select-pane -R
+
+unbind 1
+unbind 2
+unbind 3
+unbind 4
+unbind 5
+unbind 6
+unbind 7
+unbind 8
+unbind 9
+
+bind 2 split-window -v
+bind 3 split-window -h
 
 # -- oh-my-tmux variables --------------
 #tmux_conf_theme_24b_colour=true
