@@ -7,6 +7,8 @@ end
 function e -d 'Open specified file in Emacs'
     set filepath $argv[1]
     set -e argv[1]
+    set options $argv[2]
+    set -e argv[2]
 
     if [ -z $filepath ]
         command open -a Emacs
@@ -16,7 +18,7 @@ function e -d 'Open specified file in Emacs'
         set filepath (pwd)/$filepath
     end
 
-    command emacsclient --no-wait --alternate-editor="open -a Emacs --args --file" $filepath 2>/dev/null
+    command emacsclient --no-wait $options --alternate-editor="open -a Emacs --args --file" $filepath 2>/dev/null
 
     return 0
 end

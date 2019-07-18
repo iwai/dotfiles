@@ -35,7 +35,7 @@ function fzf_change_directory -d 'fzf change directory'
     return 0
 end
 
-function fzf_select_history
+function fzf_select_history -d 'command history selector'
 
     history | awk '!a[$0]++' | fzf-tmux --query "$argv" | read selected
 
@@ -58,6 +58,24 @@ function fzf_file_open -d 'fzf file open'
         else
             commandline -i $selected
         end
+    end
+
+    return 0
+end
+
+function fzgrep -d 'ripgrep fuzzy find'
+    set -q argv; or set argv "--files"
+
+    # fzgrep-preview.sh: https://github.com/junegunn/fzf.vim/issues/732#issuecomment-436897445
+    rg --column --line-number --no-heading --fixed-strings --ignore-case \
+        --hidden --follow --glob "!.git/*" --color "never" $argv \
+        | tr -d "\017" \
+        | fzf-tmux --preview "$XDG_CONFIG_HOME/fish/scripts/fzgrep-preview.sh {}" \
+        | read selected
+
+    if [ $selected ]
+        set parts (string split -m3 : $selected)
+        commandline "e $parts[1] +$parts[2]:$parts[3]"
     end
 
     return 0
