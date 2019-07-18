@@ -17,3 +17,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --margin=0,1 --color=dark,bg+:240 --bind=ctrl-v:page-down,alt-v:page-up'
 
 export WD_ROOT=~/Workspace
+
+export GOBIN=~/go/bin
+export PATH=$GOBIN:$PATH
