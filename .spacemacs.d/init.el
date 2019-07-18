@@ -39,7 +39,13 @@ values."
      yaml
      ruby
      php
-     go
+
+     (go :variables
+         go-tab-width 4
+         go-linter 'golangci-lint
+         gofmt-command "goimports"
+         go-format-before-save t
+         go-use-test-args "-race -timeout 10s")
 
      docker
      ;; ----------------------------------------------------------------
@@ -55,8 +61,13 @@ values."
      ;; markdown
      ;; org
      (shell :variables
+            ;;shell-default-shell 'shell
+            shell-default-term-shell "/bin/bash"
             shell-default-shell 'ansi-term
-            shell-default-term-shell "/usr/local/bin/fish")
+            ;;shell-default-term-shell "/usr/local/bin/fish"
+            shell-default-position 'bottom
+            shell-default-full-span t
+            )
      ;; spell-checking
      ;; version-control
      )
@@ -146,7 +157,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("RictyDiminished Nerd Font"
-                               :size 13.5
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.4
@@ -318,6 +329,10 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
+  ;;(setenv "TERM" "eterm-color")
+  ;;(setenv "TERM" "xterm-256color")
+  ;;(setenv "GO111MODULE" "on")
+
   (defun dotspacemacs//mac-command-key-to-meta (style)
     "Set command-key to meta for the given editing STYLE."
     (cond ((and (eq 'emacs style)
@@ -332,12 +347,31 @@ before packages are loaded. If you are unsure, you should try in setting them in
           ))
   (add-hook 'spacemacs-editing-style-hook 'dotspacemacs//mac-command-key-to-meta)
 
-  (exec-path-from-shell-copy-envs '("PATH" "WD_ROOT"))
-
   ;; start error from commandline
   ;; https://github.com/syl20bnr/spacemacs/issues/4755#issuecomment-292760094
   ;; (setq explicit-shell-file-name "/usr/local/bin/fish")
   ;; (setq shell-file-name "fish")
+
+  (set-language-environment "Japanese")
+  (prefer-coding-system 'utf-8)
+
+  (when (cond ((and (>= emacs-major-version 23)
+                    (display-graphic-p))
+               ;; 12pt設定じゃないと綺麗な等幅にならない...
+               ;; https://shino.tumblr.com/post/25720825967/等幅フォントでは3-の倍数以外のフォントサイズを使用すると半角文字と全角文字の横幅比が-12
+               (set-face-attribute 'default nil
+                                   :family "RictyDiminished Nerd Font"
+                                   :height 120)
+               (set-fontset-font (frame-parameter nil 'font)
+                                 'japanese-jisx0208
+                                 (cons "RictyDiminished Nerd Font" "iso10646-1"))
+               (set-fontset-font (frame-parameter nil 'font)
+                                 'japanese-jisx0212
+                                 (cons "RictyDiminished Nerd Font" "iso10646-1"))
+               (set-fontset-font (frame-parameter nil 'font)
+                                 'katakana-jisx0201
+                                 (cons "RictyDiminished Nerd Font" "iso10646-1"))
+               )))
 
   )
 
@@ -354,10 +388,14 @@ you should place your code here."
   ;;(define-key key-translation-map [?\C-h] [?\C-?])
   ;;(bind-key* "C-h" 'delete-backward-char)
 
+  (setq powerline-default-separator 'arrow)
+
   (when (display-graphic-p)
-    (setq powerline-default-separator 'arrow)
+
+    (exec-path-from-shell-copy-envs '("PATH" "WD_ROOT"))
     ;; https://memo.sugyan.com/entry/20120228/1330392943
     (define-key evil-emacs-state-map (kbd "C-,") 'other-window)
+
     )
 
   (setq persistent-scratch-save-file "~/.spacemacs.d/.persistent-scratch")
@@ -376,6 +414,14 @@ you should place your code here."
   ;;       ["black" "tomato" "PaleGreen2" "gold1"
   ;;        "DeepSkyBlue1" "MediumOrchid1" "cyan" "white"])
   ;; (setq ansi-color-map (ansi-color-make-color-map))
+
+  ;;(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+  ;;(ansi-color-for-comint-mode-on)
+
+  ;; added at go-mode
+  (setq flycheck-check-syntax-automatically '(mode-enabled save))
+
+  ;;(custom-set-variables '(markdown-header-scaling nil))
 
   )
 
