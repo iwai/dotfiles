@@ -69,7 +69,7 @@ function fzgrep -d 'ripgrep fuzzy find'
 
     # fzgrep-preview.sh: https://github.com/junegunn/fzf.vim/issues/732#issuecomment-436897445
     rg --column --line-number --no-heading --fixed-strings --ignore-case \
-        --hidden --follow --glob "!.git/*" --color "never" $argv \
+        --hidden --no-ignore --follow --glob "!.git/*" --color "never" $argv \
         | tr -d "\017" \
         | fzf-tmux --preview "$XDG_CONFIG_HOME/fish/scripts/fzgrep-preview.sh {}" \
         | read selected
