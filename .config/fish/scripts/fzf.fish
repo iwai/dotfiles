@@ -48,7 +48,8 @@ end
 
 function fzf_file_open -d 'fzf file open'
 
-    fzf-tmux --query "$argv" | read selected
+    fzf-tmux --query "$argv" --preview "$XDG_CONFIG_HOME/fish/scripts/fzgrep-preview.sh {}" \
+        | read selected
 
     if [ $selected ]
         set -l buffer (commandline -b)
