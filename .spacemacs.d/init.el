@@ -31,15 +31,17 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers 
    '(
+     org
      emacs-lisp
      shell-scripts
      vimscript
+
      markdown
      html
      yaml
+
      ruby
      php
-
      (go :variables
          go-tab-width 4
          go-linter 'golangci-lint
@@ -48,28 +50,32 @@ values."
          go-use-test-args "-race -timeout 10s")
 
      docker
+
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ivy
      auto-completion
      syntax-checking
-     ;; better-defaults
+
+     ivy
      git
-     ;; markdown
-     ;; org
+     (version-control :variables
+                      version-control-diff-tool 'git-gutter+
+                      version-control-diff-side 'left)
+
      (shell :variables
-            ;;shell-default-shell 'shell
             shell-default-term-shell "/bin/bash"
             shell-default-shell 'ansi-term
-            ;;shell-default-term-shell "/usr/local/bin/fish"
             shell-default-position 'bottom
             shell-default-full-span t
             )
      ;; spell-checking
-     ;; version-control
+
+     ;; -- private layers
+     fzf
+     my-treemacs
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -78,11 +84,12 @@ values."
    dotspacemacs-additional-packages
    '(
      persistent-scratch
+     eterm-256color
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(evil-anzu evil-args evil-ediff evil-escape evil-exchange evil-iedit-state evil-indent-plus evil-lisp-state evil-magit evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-search-highlight-persist evil-surround evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -107,7 +114,7 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
@@ -144,7 +151,7 @@ values."
    dotspacemacs-startup-lists '((recents . 5)
                                 (projects . 7))
    ;; True if the home buffer should respond to resize events.
-   dotspacemacs-startup-buffer-responsive t
+   dotspacemacs-startup-buffer-responsive nil
    ;; Default major mode of the scratch buffer (default `text-mode')
    dotspacemacs-scratch-mode 'text-mode
    ;; List of themes, the first of the list is loaded when spacemacs starts.
@@ -203,7 +210,7 @@ values."
    dotspacemacs-default-layout-name "Default"
    ;; If non nil the default layout name is displayed in the mode-line.
    ;; (default nil)
-   dotspacemacs-display-default-layout nil
+   dotspacemacs-display-default-layout t
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
    dotspacemacs-auto-resume-layouts nil
@@ -290,7 +297,7 @@ values."
    dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'evil
+   dotspacemacs-folding-method 'origami
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -329,10 +336,16 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
+  (setq user-full-name (string-trim-right (shell-command-to-string "git config --get user.name") "\n$"))
+  (setq user-mail-address (string-trim-right (shell-command-to-string "git config --get user.email") "\n$"))
+
   ;;(setenv "TERM" "eterm-color")
   ;;(setenv "TERM" "xterm-256color")
   ;;(setenv "GO111MODULE" "on")
+  ;;(setq system-uses-terminfo nil)
 
+  (when (eq system-type 'darwin)
+    )
   (defun dotspacemacs//mac-command-key-to-meta (style)
     "Set command-key to meta for the given editing STYLE."
     (cond ((and (eq 'emacs style)
@@ -354,6 +367,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (set-language-environment "Japanese")
   (prefer-coding-system 'utf-8)
+  ;;(set-terminal-coding-system 'utf-8)
 
   (when (cond ((and (>= emacs-major-version 23)
                     (display-graphic-p))
@@ -383,20 +397,26 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;;(magit-mode-map)
+
   ;; http://malkalech.com/emacs_c-h_backspace
   (define-key evil-emacs-state-map (kbd "C-h") (kbd "<DEL>"))
   ;;(define-key key-translation-map [?\C-h] [?\C-?])
   ;;(bind-key* "C-h" 'delete-backward-char)
 
-  (setq powerline-default-separator 'arrow)
+  (setq powerline-default-separator 'utf-8)
 
   (when (display-graphic-p)
 
-    (exec-path-from-shell-copy-envs '("PATH" "WD_ROOT"))
+    (exec-path-from-shell-copy-envs '("PATH" "LANG" "WD_ROOT"))
     ;; https://memo.sugyan.com/entry/20120228/1330392943
     (define-key evil-emacs-state-map (kbd "C-,") 'other-window)
 
+    (setq powerline-default-separator 'arrow)
     )
+
+  (setq neo-theme 'nerd)
+  (setq neo-vc-integration '(face))
 
   (setq persistent-scratch-save-file "~/.spacemacs.d/.persistent-scratch")
   (persistent-scratch-setup-default)
@@ -406,8 +426,8 @@ you should place your code here."
 
   ;; ansi-term での文字化け解消
   ;; https://qiita.com/eggc/items/682be005fcd4106bd9c0
-  (setenv "LANG" "ja_JP.UTF-8")
-  (add-hook 'term-mode-hook 'toggle-truncate-lines)
+  ;;(setenv "LANG" "ja_JP.UTF-8")
+  ;;(add-hook 'term-mode-hook 'toggle-truncate-lines)
   ;;(setq term-default-bg-color "#1c1c1c")
   ;; (setq system-uses-terminfo nil)
   ;; (setq ansi-color-names-vector
@@ -422,6 +442,25 @@ you should place your code here."
   (setq flycheck-check-syntax-automatically '(mode-enabled save))
 
   ;;(custom-set-variables '(markdown-header-scaling nil))
+  ;;(custom-set-variables '(fzf/args "--height=100% --reverse --margin=0,0 --color=dark,bg+:240 --bind=ctrl-v:page-down,alt-v:page-up"))
+
+
+  ;; emacs-ja.info
+  ;; https://ayatakesi.github.io
+  ;; http://emacs.rubikitch.com/emacs245-manual-ja/
+  (add-to-list 'Info-directory-list "~/.spacemacs.d/info")
+  (defun Info-find-node--info-ja (orig-fn filename &rest args)
+    (apply orig-fn
+           (pcase filename
+             ("emacs" "emacs-ja")
+             (t filename))
+           args))
+  (advice-add 'Info-find-node :around 'Info-find-node--info-ja)
+
+  ;;(setq system-uses-terminfo t)
+  ;;(setq system-uses-terminfo nil)
+
+  (add-hook 'term-mode-hook #'eterm-256color-mode)
 
   )
 
@@ -432,13 +471,15 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(fzf/args
+   "--height=100% --reverse --margin=0,0 --color=dark,bg+:240 --bind=ctrl-v:page-down,alt-v:page-up")
  '(package-selected-packages
    (quote
-    (xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help go-guru go-eldoc company-go go-mode flycheck-pos-tip pos-tip flycheck web-mode tagedit slim-mode scss-mode sass-mode pug-mode haml-mode emmet-mode company-web web-completion-data yaml-mode persistent-scratch vimrc-mode dactyl-mode robe bundler insert-shebang fish-mode company-shell rvm ruby-tools ruby-test-mode rubocop rspec-mode rbenv rake minitest chruby inf-ruby dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode smeargle orgit magit-gitflow magit-popup gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit transient git-commit with-editor company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))))
+    (treemacs-projectile treemacs-magit origami treemacs ht pfuture git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter diff-hl unfill mwim eterm-256color fzf-spacemacs-layer fzf org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot helm-themes helm-swoop helm-projectile helm-mode-manager helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag ace-jump-helm-line helm helm-core xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help go-guru go-eldoc company-go go-mode flycheck-pos-tip pos-tip flycheck web-mode tagedit slim-mode scss-mode sass-mode pug-mode haml-mode emmet-mode company-web web-completion-data yaml-mode persistent-scratch vimrc-mode dactyl-mode robe bundler insert-shebang fish-mode company-shell rvm ruby-tools ruby-test-mode rubocop rspec-mode rbenv rake minitest chruby inf-ruby dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode smeargle orgit magit-gitflow magit-popup gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit transient git-commit with-editor company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(term-default-bg-color ((t (:inherit term-color-black)))))
 

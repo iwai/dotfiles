@@ -11,10 +11,13 @@ end
 source $XDG_CONFIG_HOME/fish/keybindings.fish
 
 # appearance
-set theme_date_format "+%m/%d %H:%M:%S"
+set theme_date_format "+%m/%d %H:%M:%S "
 
 
 if test $SHLVL -eq 1 ; and test -z "$INSIDE_EMACS"
-   command tmux
+    command tmux
+else
+    function fish_title; true; end;
+    function fish_right_prompt; true; end;
 end
 

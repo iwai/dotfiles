@@ -5,6 +5,10 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 export PATH=/usr/local/sbin:$PATH
 
+export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
+export LANGUAGE=ja_JP.UTF-8
+
 export VIMINIT=":source ${XDG_CONFIG_HOME}"/vim/vimrc
 export LESSHISTFILE=/dev/null
 export LESS='-i -M -R'
@@ -13,7 +17,7 @@ export LESS='-i -M -R'
 export PAGER=less
 
 export FZF_TMUX=1
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --no-ignore --files'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --margin=0,1 --color=dark,bg+:240 --bind=ctrl-v:page-down,alt-v:page-up'
 
 export WD_ROOT=~/Workspace
