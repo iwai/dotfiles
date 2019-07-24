@@ -1,0 +1,169 @@
+From 127cbec7635f0327a823aaade69cf445d00532f6 Mon Sep 17 00:00:00 2001
+From: dickmao <none>
+Date: Thu, 2 May 2019 15:13:02 -0400
+Subject: [PATCH 1/2] markdown-update-header-faces needed explicit call on
+ startup
+
+User saves customization of `markdown-header-scaling` and restarts
+emacs only to find headers do not resize because the `:set` attribute
+of `defcustom markdown-header-scaling` is not explicitly called.
+
+Rationalize the defcustom stuff and test.
+---
+ markdown-mode.el       | 49 +++++++++++++++++++-----------------------
+ tests/markdown-test.el | 25 +++++++++++++++++++++
+ 2 files changed, 47 insertions(+), 27 deletions(-)
+
+diff --git a/markdown-mode.el b/markdown-mode.el
+index 3e0f4ba..c998e96 100644
+--- a/markdown-mode.el
++++ b/markdown-mode.el
+@@ -2039,7 +2039,7 @@ headers of levels one through six respectively."
+   :initialize 'custom-initialize-default
+   :set (lambda (symbol value)
+          (set-default symbol value)
+-         (markdown-update-header-faces value))
++         (markdown-update-header-faces))
+   :group 'markdown-faces
+   :package-version '(markdown-mode . "2.2"))
+ 
+@@ -2051,44 +2051,38 @@ Used when `markdown-header-scaling' is non-nil."
+   :initialize 'custom-initialize-default
+   :set (lambda (symbol value)
+          (set-default symbol value)
+-         (markdown-update-header-faces markdown-header-scaling value))
++         (markdown-update-header-faces))
+   :group 'markdown-faces)
+ 
+ (defun markdown-make-header-faces ()
+   "Build the faces used for Markdown headers."
+-  (let ((inherit-faces '(font-lock-function-name-face)))
+-    (when markdown-header-scaling
+-      (setq inherit-faces (cons 'variable-pitch inherit-faces)))
++  (unless (facep 'markdown-header-face)
+     (defface markdown-header-face
+-      `((t (:inherit ,inherit-faces :weight bold)))
++      '((t (:inherit (font-lock-function-name-face) :weight bold)))
+       "Base face for headers."
+-      :group 'markdown-faces))
+-  (dotimes (num 6)
+-    (let* ((num1 (1+ num))
+-           (face-name (intern (format "markdown-header-face-%s" num1)))
+-           (scale (if markdown-header-scaling
+-                      (float (nth num markdown-header-scaling-values))
+-                    1.0)))
+-      (eval
+-       `(defface ,face-name
+-          '((t (:inherit markdown-header-face :height ,scale)))
+-          (format "Face for level %s headers.
++      :group 'markdown-faces)
++    (dotimes (num 6)
++      (let* ((num1 (1+ num))
++             (face-name (intern (format "markdown-header-face-%s" num1)))
++             (scale (float (nth num markdown-header-scaling-values))))
++        (eval
++         `(defface ,face-name
++            '((t (:inherit (variable-pitch markdown-header-face) :height ,scale)))
++            (format "Face for level %s headers.
+ You probably don't want to customize this face directly. Instead
+ you can customize the base face `markdown-header-face' or the
+ variable-height variable `markdown-header-scaling'." ,num1)
+-          :group 'markdown-faces)))))
++            :group 'markdown-faces))))))
+ 
+-(markdown-make-header-faces)
+-
+-(defun markdown-update-header-faces (&optional scaling scaling-values)
+-  "Update header faces, depending on if header SCALING is desired.
+-If so, use given list of SCALING-VALUES relative to the baseline
+-size of `markdown-header-face'."
++(defun markdown-update-header-faces (&optional _scaling _scaling-values)
++  "Update header faces using current values of markdown-header-scaling and
++markdown-header-scaling-values.  Arguments are ignored but retained to avoid breakage."
++  (markdown-make-header-faces)
+   (dotimes (num 6)
+     (let* ((face-name (intern (format "markdown-header-face-%s" (1+ num))))
+-           (scale (cond ((not scaling) 1.0)
+-                        (scaling-values (float (nth num scaling-values)))
+-                        (t (float (nth num markdown-header-scaling-values))))))
++           (scale (if markdown-header-scaling
++                      (float (nth num markdown-header-scaling-values))
++                    1.0)))
+       (unless (get face-name 'saved-face) ; Don't update customized faces
+         (set-face-attribute face-name nil :height scale)))))
+ 
+@@ -9686,6 +9680,7 @@ rows and columns and the column alignment."
+     (markdown-live-preview-remove)))
+ 
+ 
++(markdown-update-header-faces)
+ (provide 'markdown-mode)
+ 
+ ;; Local Variables:
+diff --git a/tests/markdown-test.el b/tests/markdown-test.el
+index 54afa76..25dcb70 100644
+--- a/tests/markdown-test.el
++++ b/tests/markdown-test.el
+@@ -119,6 +119,12 @@ This file is not saved."
+   (dolist (loc (number-sequence begin end))
+     (message "%d: %s" loc (get-char-property loc prop))))
+ 
++(defun markdown-test-range-has-face-attribute (begin end plst)
++  "Verify that range BEGIN to END has face containing PROP=VALUE."
++  (dolist (loc (number-sequence begin end))
++    (cl-loop for (k v) on plst by #'cddr
++             do (should (equal (face-attribute (get-char-property loc 'face) k) v)))))
++
+ (defun markdown-test-range-has-property (begin end prop value)
+   "Verify that range BEGIN to END has PROP equal to or containing VALUE."
+   (let (vals fail-loc)
+@@ -3083,6 +3089,25 @@ takes precedence)."
+     (should (markdown-on-heading-p))
+     (should-not (markdown-range-property-any 453 484 'face '(markdown-hr-face)))))
+ 
++(ert-deftest test-markdown-font-lock/heading-height ()
++  "User customizes scaling, and restarts emacs.  Scaling needs to render."
++  (let ((restore-scaling markdown-header-scaling)
++        (restore-scaling-values markdown-header-scaling-values))
++    (markdown-test-string
++        "# h1
++"
++      (custom-set-variables '(markdown-header-scaling t t))
++      (markdown-test-range-has-face-attribute 3 4
++                            `(:height ,(car markdown-header-scaling-values)))
++      (custom-set-variables '(markdown-header-scaling nil t))
++      (markdown-test-range-has-face-attribute 3 4 '(:height 1.0))
++      (custom-set-variables '(markdown-header-scaling t t)
++                            '(markdown-header-scaling-values
++                              `(3.0 ,(cdr markdown-header-scaling-values))))
++      (markdown-test-range-has-face-attribute 3 4 '(:height 3.0))
++      (custom-set-variables '(markdown-header-scaling restore-scaling t)
++                            '(markdown-header-scaling-values restore-scaling-values t)))))
++
+ (ert-deftest test-markdown-font-lock/heading-code-block-no-whitespace ()
+   "Headings immediately before code blocks should be identified correctly.
+ See GH-234."
+
+From 6cad21593fd2c19621259cbe4e0f0f5883150ef0 Mon Sep 17 00:00:00 2001
+From: dickmao <none>
+Date: Thu, 2 May 2019 15:21:30 -0400
+Subject: [PATCH 2/2] First line is not a complete sentence
+
+---
+ markdown-mode.el | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/markdown-mode.el b/markdown-mode.el
+index c998e96..96caa81 100644
+--- a/markdown-mode.el
++++ b/markdown-mode.el
+@@ -2075,8 +2075,7 @@ variable-height variable `markdown-header-scaling'." ,num1)
+             :group 'markdown-faces))))))
+ 
+ (defun markdown-update-header-faces (&optional _scaling _scaling-values)
+-  "Update header faces using current values of markdown-header-scaling and
+-markdown-header-scaling-values.  Arguments are ignored but retained to avoid breakage."
++  "Update header faces using current values of markdown-header-scaling and markdown-header-scaling-values.  Arguments are ignored but retained to avoid breakage."
+   (markdown-make-header-faces)
+   (dotimes (num 6)
+     (let* ((face-name (intern (format "markdown-header-face-%s" (1+ num))))

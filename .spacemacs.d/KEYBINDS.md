@@ -42,6 +42,16 @@ https://qiita.com/lazy_dog/items/cfeffe30efd4b32703b1
 |C-x [|backward-page||
 |C-x ]|forward-page||
 
+### avy
+
+|SPC jb|avy-pop-mark|
+|SPC jj|evil-avy-goto-char|
+|SPC jJ|evil-avy-goto-char-2|
+|SPC jl|evil-avy-goto-line|
+|SPC ju|spacemacs/avy-goto-url|
+|SPC jw|evil-avy-goto-word-or-subword-1|
+|SPC xo|spacemacs/avy-open-url|
+
 ## 改行／インデント
 
 |C-m|newline-and-indent|改行後インデント|

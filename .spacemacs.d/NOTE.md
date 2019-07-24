@@ -137,6 +137,17 @@ https://github.com/Malabarba/aggressive-indent-mode
 https://github.com/Fuco1/smartparens
 
 
+## Flycheck
+
+`syntax-checking` レイヤーにより自動で有効になるようになっていて、 `flycheck-global-modes` に含まれるモードは、自動的に有効になる
+
+Emacs-Lispは有効になっていなかったので追加する `(spacemacs/add-flycheck-hook 'emacs-lisp-mode)`
+
+|SPC e v|flycheckの設定を確認|
+|SPC e l|すべてのエラーのリストを表示します|
+|SPC e .||
+
+
 ## Emcas Lisp
 
 
