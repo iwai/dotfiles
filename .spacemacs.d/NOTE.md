@@ -14,20 +14,28 @@
 - https://microsoft.github.io/language-server-protocol/
 
 
+## パースペクティブ
+
+パースペクティブは、ウィンドウ構成と一連のバッファーで構成されており、少なくとも一つのワークスペースを保持します。
+また、パースペクティブに連動してプロジェクトを切替られるようになっています。
+これらは、 persp-mode, eyebrowse, projectile のパッケージにより実現されています。
+
+|SPC p l|spacemacs/ivy-persp-switch-project (Layouts)|パースペクティブとプロジェクトの切替|
+
+
 ## プロジェクト
 
-SPACEMACSでは、プロジェクトの新規作成はありません、プロジェクト＝Gitリポジトリの概念で、プロジェクト固有のファイルは必要ありません。
+プロジェクトの新規作成はありません、プロジェクト＝Gitリポジトリの概念で、プロジェクト固有のファイルは必要ありません。
 Gitリポジトリ以外にも mercurial などいくつかに対応しています。もしリポジトリの無いフォルダを対象としたい場合は、
 `.projectile` という名前の空ファイルを置くだけです。
 
 |SPC p SPC|counsel-projectile|プロジェクトを選択してファイルを開く|
 |SPC p p|counsel-projectile-switch-project|プロジェクトを選択（切替）してファイルを開く|
-|SPC p l|spacemacs/ivy-persp-switch-project||
 
 |SPC p f|counsel-projectile-find-file|プロジェクト内からファイルを開く|
-|SPC p b|counsel-projectile-switch-to-buffer|
-|SPC p k|projectile-kill-buffers|
-|SPC p r|projectile-recentf|
+|SPC p b|counsel-projectile-switch-to-buffer|プロジェクト内で表示されているバッファを選択|
+|SPC p k|projectile-kill-buffers|プロジェクトに関連するバッファをすべて削除|
+|SPC p r|projectile-recentf|プロジェクトに関連する訪問履歴からファイルを開く|
 
 |SPC p %|projectile-replace-regexp|
 |SPC p g|projectile-find-tag|
@@ -40,37 +48,9 @@ Gitリポジトリ以外にも mercurial などいくつかに対応していま
 |SPC p o|org-projectile/goto-todos|
 |SPC p v|projectile-vc|
 
-
-## パースペクティブ
-
-各パースペクティブは、ウィンドウ構成と一連のバッファーで構成されています。
-パースペクティブに切り替えるとウィンドウ構成がアクティブになり、パースペクティブにある場合はデフォルトでそのバッファーのみが使用可能になります。
-
-|C-c p C|persp-kill|
-|C-c p I|persp-import-win-conf|
-|C-c p K|persp-kill-buffer|
-|C-c p L|persp-load-from-file-by-names|
-|C-c p S|persp-window-switch|
-|C-c p W|persp-save-to-file-by-names|
-|C-c p a|persp-add-buffer|
-|C-c p b|persp-switch-to-buffer|
-|C-c p c|persp-copy|
-|C-c p i|persp-import-buffers|
-|C-c p k|persp-remove-buffer|
-|C-c p l|persp-load-state-from-file|
-|C-c p n|persp-next|
-|C-c p p|persp-prev|
-|C-c p r|persp-rename|
-|C-c p s|persp-frame-switch|
-|C-c p t|persp-temporarily-display-buffer|
-|C-c p w|persp-save-state-to-file|
-|C-c p z|persp-save-and-kill|
-
-
 key             binding
 ---             -------
 
-M-m p SPC       counsel-projectile
 M-m p !         projectile-run-shell-command-in-root
 M-m p $         Prefix Command
 M-m p %         projectile-replace-regexp
@@ -96,6 +76,18 @@ M-m p t         neotree-find-project-root
 M-m p v         projectile-vc
 
 M-m p $ t       projectile-multi-term-in-root
+
+## ワークスペース
+
+ワークスペースは、ウィンドウ構成を保持しています。
+
+|SPC p l w|spacemacs/ivy-persp-switch-project (Workspace)|ワークスペースの切替|
+|SPC b W|spacemacs/goto-buffer-workspace|指定したバッファを表示しているワークスペースへ移動、表示がなければ現在のバッファに表示|
+
+
+## Layout
+
+
 
 
 
@@ -136,6 +128,15 @@ https://github.com/zk-phi/indent-guide
 https://github.com/Malabarba/aggressive-indent-mode
 https://github.com/Fuco1/smartparens
 
+### 
+
+```elisp
+   dotspacemacs-mode-line-theme (if (display-graphic-p)
+                                    '(all-the-icons :separator arrow :separator-scale 1.5)
+                                  '(spacemacs :separator arrow :separator-scale 1.5))
+```
+
+`M-x all-the-icons-install-fonts`
 
 ## Flycheck
 
@@ -189,3 +190,15 @@ emacs上のterm.elで正しくansi colorを256色表示する方法
 http://geekna.hatenablog.jp/entry/20130901/p1
 Emacs上のターミナルを最強に: term+.el
 https://tarao.hatenablog.com/entry/20121021/1350844264
+
+
+## Theme
+
+`dotspacemacs-configuration-layers` に `themes-megapack` を追加して、 `dotspacemacs-themes` に `dracula` を追加
+
+
+## Migration
+
+アップグレードを実施した際、init.elの構成が変更される場合があるので、差分を適用する場合
+
+|SPC f e D|ediff-dotfile-and-template|現在のinit.elとテンプレートをediff|

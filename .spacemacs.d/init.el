@@ -71,7 +71,7 @@ This function should only modify configuration layer settings."
      ivy
      git
      (version-control :variables
-                      version-control-diff-tool 'git-gutter+
+                      version-control-diff-tool 'diff-hl
                       version-control-diff-side 'left)
 
      (shell :variables
@@ -96,6 +96,7 @@ This function should only modify configuration layer settings."
    '(
      persistent-scratch
      eterm-256color
+     editorconfig
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -158,7 +159,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
    ;; latest version of packages from MELPA. (default nil)
-   dotspacemacs-use-spacelpa nil
+   dotspacemacs-use-spacelpa t
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
    ;; (default nil)
@@ -181,6 +182,7 @@ It should only modify the values of Spacemacs settings."
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
    dotspacemacs-editing-style 'emacs
+
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
 
@@ -219,8 +221,11 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(dracula)
+   ;; dotspacemacs-themes '(dracula
+   ;;                       doom-dracula
+   ;;                       spacemacs-dark
+   ;;                       spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -229,7 +234,11 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme (if (display-graphic-p)
+                                    '(spacemacs :separator arrow :separator-scale 1.5)
+                                  '(spacemacs :separator utf-8 :separator-scale 1.5))
+   ;;dotspacemacs-mode-line-theme '(doom)
+   ;;dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.4)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -240,10 +249,8 @@ It should only modify the values of Spacemacs settings."
                                :size 12
                                :weight normal
                                :width normal
-                               :powerline-scale 1.4
-                               ;:separator-scale 3.0
+                               :powerline-scale 1.5
                                )
-   ;;dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 5.0)
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -280,7 +287,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil the default layout name is displayed in the mode-line.
    ;; (default nil)
-   dotspacemacs-display-default-layout nil
+   dotspacemacs-display-default-layout t
 
    ;; If non-nil then the last auto saved layouts are resumed automatically upon
    ;; start. (default nil)
@@ -491,11 +498,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq user-full-name (string-trim-right (shell-command-to-string "git config --get user.name") "\n$"))
   (setq user-mail-address (string-trim-right (shell-command-to-string "git config --get user.email") "\n$"))
 
-  ;;(setenv "TERM" "eterm-color")
-  ;;(setenv "TERM" "xterm-256color")
-  ;;(setenv "GO111MODULE" "on")
-  ;;(setq system-uses-terminfo nil)
-
   (when (eq system-type 'darwin)
     )
   (defun dotspacemacs//mac-command-key-to-meta (style)
@@ -546,6 +548,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
+
+  
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -565,24 +570,21 @@ you should place your code here."
   ;; https://github.com/abo-abo/swiper/issues/2137
   (define-key ivy-minibuffer-map (kbd "C-r") 'ivy-previous-line-or-history)
 
-  (setq powerline-default-separator 'utf-8)
-
   (when (display-graphic-p)
 
-    ;; (exec-path-from-shell-copy-envs '("PATH" "LANG" "WD_ROOT"))
+    (if (version< spacemacs-version "0.300.0")
+        (exec-path-from-shell-copy-envs '("PATH" "LANG" "WD_ROOT")))
+
     ;; https://memo.sugyan.com/entry/20120228/1330392943
     (define-key evil-emacs-state-map (kbd "C-,") 'other-window)
-
-    (setq powerline-default-separator 'arrow)
     )
-
-  (setq persistent-scratch-save-file "~/.spacemacs.d/.persistent-scratch")
-  (persistent-scratch-setup-default)
 
   (setq yas-snippet-dirs
         '("~/.spacemacs.d/snippets"))
+  (setq persistent-scratch-save-file "~/.spacemacs.d/.persistent-scratch")
+  (persistent-scratch-setup-default)
 
-  ;;(setq projectile-project-search-path (list (getenv "WD_ROOT")))
+  (setq projectile-project-search-path (list (getenv "WD_ROOT")))
 
   ;; emacs-ja.info
   ;; https://ayatakesi.github.io
@@ -608,30 +610,34 @@ you should place your code here."
         '((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
   (global-whitespace-mode 1)
 
+  (if (eq (first dotspacemacs-mode-line-theme) 'spacemacs)
+      (progn
+        ;; http://blog.livedoor.jp/tek_nishi/archives/9654557.html
+        ;; https://gist.github.com/tek-nishi/93bfa4614f1254b0c2255bc122d0d1c0#file-buffer-encoding-abbrev-el
+        (spaceline-define-segment buffer-encoding-abbrev
+          "The line ending convention used in the buffer."
+          (let ((buf-coding (format "%s" buffer-file-coding-system)))
+            (list (replace-regexp-in-string "^prefer-" ""
+                                            (replace-regexp-in-string "-with-signature\\|-unix\\|-dos\\|-mac" "" buf-coding))
+                  (concat (and (string-match "with-signature" buf-coding) "ⓑ")
+                          (and (string-match "unix"           buf-coding) "ⓤ")
+                          (and (string-match "dos"            buf-coding) "ⓓ")
+                          (and (string-match "mac"            buf-coding) "ⓜ")
+                          )))
+          :separator "")
 
-  ;; http://blog.livedoor.jp/tek_nishi/archives/9654557.html
-  ;; https://gist.github.com/tek-nishi/93bfa4614f1254b0c2255bc122d0d1c0#file-buffer-encoding-abbrev-el
-  (spaceline-define-segment buffer-encoding-abbrev
-    "The line ending convention used in the buffer."
-    (let ((buf-coding (format "%s" buffer-file-coding-system)))
-      (list (replace-regexp-in-string "^prefer-" ""
-                                      (replace-regexp-in-string "-with-signature\\|-unix\\|-dos\\|-mac" "" buf-coding))
-            (concat (and (string-match "with-signature" buf-coding) "ⓑ")
-                    (and (string-match "unix"           buf-coding) "ⓤ")
-                    (and (string-match "dos"            buf-coding) "ⓓ")
-                    (and (string-match "mac"            buf-coding) "ⓜ")
-                    )))
-    :separator "")
-
-  (spaceline-toggle-buffer-size-off)
+        (spaceline-toggle-buffer-size-off)
+        ))
 
   (add-hook 'term-mode-hook #'eterm-256color-mode)
 
-  ;;(spacemacs/add-flycheck-hook 'emacs-lisp-mode)
   )
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -641,11 +647,11 @@ you should place your code here."
    "--height=100% --reverse --margin=0,0 --color=dark,bg+:240 --bind=ctrl-v:page-down,alt-v:page-up")
  '(package-selected-packages
    (quote
-    (elscreen perspeen yapfify web-beautify toml-mode sql-indent racer pyvenv pytest pyenv-mode py-isort pip-requirements livid-mode skewer-mode simple-httpd live-py-mode js2-refactor multiple-cursors hy-mode flycheck-rust cython-mode company-anaconda cargo rust-mode anaconda-mode pythonic js2-mode js-doc company-tern dash-functional tern coffee-mode treemacs-projectile treemacs-magit origami treemacs ht pfuture git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter diff-hl unfill mwim eterm-256color fzf-spacemacs-layer fzf org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot helm-themes helm-swoop helm-projectile helm-mode-manager helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag ace-jump-helm-line helm helm-core xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help go-guru go-eldoc company-go go-mode flycheck-pos-tip pos-tip flycheck web-mode tagedit slim-mode scss-mode sass-mode pug-mode haml-mode emmet-mode company-web web-completion-data yaml-mode persistent-scratch vimrc-mode dactyl-mode robe bundler insert-shebang fish-mode company-shell rvm ruby-tools ruby-test-mode rubocop rspec-mode rbenv rake minitest chruby inf-ruby dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode smeargle orgit magit-gitflow magit-popup gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit transient git-commit with-editor company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))))
+    (all-the-icons-dired elscreen perspeen yapfify web-beautify toml-mode sql-indent racer pyvenv pytest pyenv-mode py-isort pip-requirements livid-mode skewer-mode simple-httpd live-py-mode js2-refactor multiple-cursors hy-mode flycheck-rust cython-mode company-anaconda cargo rust-mode anaconda-mode pythonic js2-mode js-doc company-tern dash-functional tern coffee-mode treemacs-projectile treemacs-magit origami treemacs ht pfuture git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter diff-hl unfill mwim eterm-256color fzf-spacemacs-layer fzf org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot helm-themes helm-swoop helm-projectile helm-mode-manager helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag ace-jump-helm-line helm helm-core xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help go-guru go-eldoc company-go go-mode flycheck-pos-tip pos-tip flycheck web-mode tagedit slim-mode scss-mode sass-mode pug-mode haml-mode emmet-mode company-web web-completion-data yaml-mode persistent-scratch vimrc-mode dactyl-mode robe bundler insert-shebang fish-mode company-shell rvm ruby-tools ruby-test-mode rubocop rspec-mode rbenv rake minitest chruby inf-ruby dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode smeargle orgit magit-gitflow magit-popup gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy evil-magit magit transient git-commit with-editor company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(term-default-bg-color ((t (:inherit term-color-black)))))
-
+)
