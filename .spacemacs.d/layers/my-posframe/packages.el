@@ -64,6 +64,7 @@ Each entry is either:
 
 (defun my-posframe/init-ivy-posframe ()
   (use-package ivy-posframe
+    :diminish ""
     :init
     (progn
       (setq ivy-posframe-display-functions-alist
@@ -81,8 +82,6 @@ Each entry is either:
       )
     :config
     (progn
-      (spacemacs|hide-lighter ivy-posframe-mode)
-
       (setq posframe-arghandler #'my-posframe-arghandler)
 
       (defun my-posframe-arghandler (posframe-buffer arg-name value)
