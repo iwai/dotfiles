@@ -21,3 +21,22 @@ else
     function fish_right_prompt; true; end;
 end
 
+
+function fish_greeting -d "What's up, fish?"
+    set_color $fish_color_autosuggestion
+    uname -nmsr
+
+    # TODO: `command -q -s` only works on fish 2.5+, so hold off on that for now
+    command -s uptime >/dev/null
+    and uptime
+
+    if command -q -s brew
+        set outdated (brew outdated | wc -l | tr -d [\:blank\:])
+        echo -n "Homebrew outdated: "
+        set_color yellow; echo -n $outdated
+        set_color $fish_color_autosuggestion; echo -n " packages. more infomation `brew outdated`."
+    end
+
+    set_color normal
+end
+
