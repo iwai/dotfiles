@@ -1,7 +1,4 @@
-# SPACEEMACS
-
-Emacs の Prefix Key とお約束ごと
-https://qiita.com/lazy_dog/items/cfeffe30efd4b32703b1
+# SPACEMACS KEYBINDS
 
 ## プレフィックス
 
@@ -290,4 +287,8 @@ https://qiita.com/lazy_dog/items/cfeffe30efd4b32703b1
 |M-!|shell-command|シェルコマンドを実行|
 |M-&|async-shell-command|非同期シェルコマンドを実行|
 |M-&#124;|shell-command-on-region|範囲を標準入力にしてシェルコマンドを実行|
+
+## リンク
+
+- [Emacs の Prefix Key とお約束ごと](https://qiita.com/lazy_dog/items/cfeffe30efd4b32703b1)
 
