@@ -211,3 +211,69 @@ https://github.com/railwaycat/homebrew-emacsmacport
 https://bitbucket.org/mituharu/emacs-mac/src/master/
 
 
+## org-mode
+
+| keybind | command | description |
+| ------- | ------- | ----------- |
+|SPC a o #|org-agenda-list-stuck-projects||
+|SPC a o /|org-occur-in-agenda-files||
+|SPC a o a|org-agenda-list||
+|SPC a o c|org-capture||
+|SPC a o e|org-store-agenda-views||
+|SPC a o l|org-store-link||
+|SPC a o m|org-tags-view||
+|SPC a o o|org-agenda||
+|SPC a o p|org-projectile/capture||
+|SPC a o s|org-search-view||
+|SPC a o t|org-todo-list||
+|SPC t m c|spacemacs/toggle-mode-line-org-clock||
+
+### リスト作成
+
+| keybind | command | description |
+| ------- | ------- | ----------- |
+|C-RET|org-insert-heading-respect-content|新しい見出しを追加|
+|C-S-RET|org-insert-todo-heading-respect-content|新しいTODOを追加|
+|TAB|org-cycle|入力中の見出し階層を変更|
+|M-<left>|カーソル位置の見出し階層を1上げる|
+|M-<right>|カーソル位置の見出し階層を1下げる|
+|S-<left>|org-support-shift-select|bulletのスタイルを切り替え|
+|S-<right>|org-support-shift-select|bulletのスタイルを切り替え|
+|C-c C-l|org-insert-link|リンクの挿入|
+|C-c C-o|org-open-at-point|カーソル位置のリンクを開く|
+|S-<up>|org-support-shift-select|現在の見出し優先度を上下する|
+|S-<down>|org-support-shift-select|現在の見出し優先度を上下する|
+|C-c C-d|org-deadline|締切日を挿入|
+|C-c C-s|org-schedule|予定日を挿入|
+
+- 見出しに `[/]` もしくは `[%]` を追加することで進捗状況を表示
+- 見出しの末尾に `:foo:` もしくは `:foo:bar:` のようにタグを設定
+
+### リスト表示
+
+| keybind | command | description |
+| ------- | ------- | ----------- |
+|TAB|org-cycle|カーソル位置のツリーの開閉|
+|S-TAB|org-shifttab|ツリー全体の開閉|
+|C-c c|org-capture|簡易メモ|
+|C-c a|org-agenda|
+|C-c ^|org-sort-entries-or-items|同じ階層のエントリーを並び替え|
+
+### 時間計測
+
+| keybind | command | description |
+| ------- | ------- | ----------- |
+|C-c C-x C-i|org-clock-in|時間計測開始|
+|C-c C-x C-o|org-clock-in|時間計測停止|
+
+### 休止時間
+
+| keybind | description |
+| ------- | ----------- |
+|k|休止時間として計測された時間の一部または全てをタスクの計測時間として保持、何分間保持するか入力|
+|K|入力された分数だけ時間を保持すると同時にただちに現在のタスクの計測を中止|
+|s|計測時間から全ての休止時間が差し引かれ、戻ってきた時点から再開|
+|S|休止時間を保持せず、休止開始時の時刻で時間の計測を中止|
+|C|時間計測そのものをキャンセル|
+
+
