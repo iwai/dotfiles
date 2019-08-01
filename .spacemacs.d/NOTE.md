@@ -7,7 +7,6 @@
 - https://shino.tumblr.com/post/25720825967/等幅フォントでは3-の倍数以外のフォントサイズを使用すると半角文字と全角文字の横幅比が-12
 - https://qiita.com/melito/items/238bdf72237290bc6e42
 - https://miyazakikenji.wordpress.com/2016/08/30/日本語-font-の導入/
-
 - https://github.com/tsunesan3/awsome-jp-coding-fonts
 
 ## lsp-mode
@@ -23,8 +22,7 @@
 
 | keybind | command | description |
 | ------- | ------- | ----------- |
-|SPC p l|spacemacs/ivy-persp-switch-project (Layouts)|パースペクティブとプロジェクトの切替|
-
+|SPC p l|spacemacs/ivy-persp-switch-project|パースペクティブとプロジェクトの切替|
 
 ## プロジェクト
 
@@ -88,8 +86,8 @@ M-m p $ t       projectile-multi-term-in-root
 
 | keybind | command | description |
 | ------- | ------- | ----------- |
-|SPC p l w|spacemacs/ivy-persp-switch-project (Workspace)|ワークスペースの切替|
-|SPC b W|spacemacs/goto-buffer-workspace|指定したバッファを表示しているワークスペースへ移動、表示がなければ現在のバッファに表示|
+|SPC p l w|spacemacs/ivy-persp-switch-project|ワークスペースの切替|
+|SPC b W|spacemacs/goto-buffer-workspace|指定したバッファを表示しているワークスペースへ移動<br>表示がなければ現在のバッファに表示|
 
 
 ## Layout
@@ -148,7 +146,6 @@ M-m p $ t       projectile-multi-term-in-root
 ## Flycheck
 
 `syntax-checking` レイヤーにより自動で有効になるようになっていて、 `flycheck-global-modes` に含まれるモードは、自動的に有効になる
-
 Emacs-Lispは有効になっていなかったので追加する `(spacemacs/add-flycheck-hook 'emacs-lisp-mode)`
 
 | keybind | description |
@@ -175,7 +172,6 @@ Emacs-Lispは有効になっていなかったので追加する `(spacemacs/add
 - https://github.com/drgeb/spacemacs
 - https://sriramkswamy.github.io/dotemacs/
 - [EmacsWiki](https://www.emacswiki.org/emacs/サイトマップ)
-
 - https://with-emacs.com/posts/editing/show-matching-lines-when-parentheses-go-off-screen/
 
 ## Package Manager
@@ -198,14 +194,16 @@ Emacs-Lispは有効になっていなかったので追加する `(spacemacs/add
 
 アップグレードを実施した際、init.elの構成が変更される場合があるので、差分を適用する場合
 
+| keybind | command | description |
+| ------- | ------- | ----------- |
 |SPC f e D|ediff-dotfile-and-template|現在のinit.elとテンプレートをediff|
 
 ## Troubleshooting
 
 [Posframe Mac OS black fullscreen](https://github.com/tumashu/posframe/issues/30) 問題は、下記のMacPort版を利用することで、問題解決。
 
-https://github.com/railwaycat/homebrew-emacsmacport
-https://bitbucket.org/mituharu/emacs-mac/src/master/
+- https://github.com/railwaycat/homebrew-emacsmacport
+- https://bitbucket.org/mituharu/emacs-mac/src/master/
 
 ## org-mode
 
@@ -231,14 +229,14 @@ https://bitbucket.org/mituharu/emacs-mac/src/master/
 |C-RET|org-insert-heading-respect-content|新しい見出しを追加|
 |C-S-RET|org-insert-todo-heading-respect-content|新しいTODOを追加|
 |TAB|org-cycle|入力中の見出し階層を変更|
-|M-<left>|カーソル位置の見出し階層を1上げる|
-|M-<right>|カーソル位置の見出し階層を1下げる|
-|S-<left>|org-support-shift-select|bulletのスタイルを切り替え|
-|S-<right>|org-support-shift-select|bulletのスタイルを切り替え|
+|M-\<left\>|カーソル位置の見出し階層を1上げる|
+|M-\<right\>|カーソル位置の見出し階層を1下げる|
+|S-\<left\>|org-support-shift-select|bulletのスタイルを切り替え|
+|S-\<right\>|org-support-shift-select|bulletのスタイルを切り替え|
 |C-c C-l|org-insert-link|リンクの挿入|
 |C-c C-o|org-open-at-point|カーソル位置のリンクを開く|
-|S-<up>|org-support-shift-select|現在の見出し優先度を上下する|
-|S-<down>|org-support-shift-select|現在の見出し優先度を上下する|
+|S-\<up\>|org-support-shift-select|現在の見出し優先度を上下する|
+|S-\<down\>|org-support-shift-select|現在の見出し優先度を上下する|
 |C-c C-d|org-deadline|締切日を挿入|
 |C-c C-s|org-schedule|予定日を挿入|
 
