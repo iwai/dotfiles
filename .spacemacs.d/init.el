@@ -569,7 +569,9 @@ you should place your code here."
   ;;(define-key key-translation-map [?\C-h] [?\C-?])
   ;;(bind-key* "C-h" 'delete-backward-char)
 
-  (define-key evil-emacs-state-map (kbd "C-r") 'swiper)
+  ;; 選択している範囲がある場合はその文字列を初期検索するように変更
+  (define-key evil-emacs-state-map (kbd "C-s") 'swiper-thing-at-point)
+  (define-key evil-emacs-state-map (kbd "C-r") 'swiper-thing-at-point)
   ;; https://github.com/abo-abo/swiper/issues/2137
   (define-key ivy-minibuffer-map (kbd "C-r") 'ivy-previous-line-or-history)
 
