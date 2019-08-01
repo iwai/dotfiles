@@ -202,3 +202,12 @@ https://tarao.hatenablog.com/entry/20121021/1350844264
 アップグレードを実施した際、init.elの構成が変更される場合があるので、差分を適用する場合
 
 |SPC f e D|ediff-dotfile-and-template|現在のinit.elとテンプレートをediff|
+
+## Troubleshooting
+
+[Posframe Mac OS black fullscreen](https://github.com/tumashu/posframe/issues/30) 問題は、下記のMacPort版を利用することで、問題解決。
+
+https://github.com/railwaycat/homebrew-emacsmacport
+https://bitbucket.org/mituharu/emacs-mac/src/master/
+
+
