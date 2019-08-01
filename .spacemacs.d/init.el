@@ -636,6 +636,8 @@ you should place your code here."
 
   (add-hook 'term-mode-hook #'eterm-256color-mode)
 
+  (setq spaceline-org-clock-p t)
+
   (spacemacs|hide-lighter rainbow-mode)
 
   )
