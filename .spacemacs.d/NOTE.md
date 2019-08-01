@@ -8,6 +8,7 @@
 - https://qiita.com/melito/items/238bdf72237290bc6e42
 - https://miyazakikenji.wordpress.com/2016/08/30/日本語-font-の導入/
 
+- https://github.com/tsunesan3/awsome-jp-coding-fonts
 
 ## lsp-mode
 
@@ -20,6 +21,8 @@
 また、パースペクティブに連動してプロジェクトを切替られるようになっています。
 これらは、 persp-mode, eyebrowse, projectile のパッケージにより実現されています。
 
+| keybind | command | description |
+| ------- | ------- | ----------- |
 |SPC p l|spacemacs/ivy-persp-switch-project (Layouts)|パースペクティブとプロジェクトの切替|
 
 
@@ -29,21 +32,23 @@
 Gitリポジトリ以外にも mercurial などいくつかに対応しています。もしリポジトリの無いフォルダを対象としたい場合は、
 `.projectile` という名前の空ファイルを置くだけです。
 
+| keybind | command | description |
+| ------- | ------- | ----------- |
 |SPC p SPC|counsel-projectile|プロジェクトを選択してファイルを開く|
 |SPC p p|counsel-projectile-switch-project|プロジェクトを選択（切替）してファイルを開く|
-
+||||
 |SPC p f|counsel-projectile-find-file|プロジェクト内からファイルを開く|
 |SPC p b|counsel-projectile-switch-to-buffer|プロジェクト内で表示されているバッファを選択|
 |SPC p k|projectile-kill-buffers|プロジェクトに関連するバッファをすべて削除|
 |SPC p r|projectile-recentf|プロジェクトに関連する訪問履歴からファイルを開く|
-
+||||
 |SPC p %|projectile-replace-regexp|
 |SPC p g|projectile-find-tag|
 |SPC p G|projectile-regenerate-tags|
 |SPC p c|projectile-compile-project|
 |SPC p T|projectile-test-project|
 |SPC p I|projectile-invalidate-cache|
-
+||||
 |SPC p t|neotree-find-project-root|
 |SPC p o|org-projectile/goto-todos|
 |SPC p v|projectile-vc|
@@ -81,6 +86,8 @@ M-m p $ t       projectile-multi-term-in-root
 
 ワークスペースは、ウィンドウ構成を保持しています。
 
+| keybind | command | description |
+| ------- | ------- | ----------- |
 |SPC p l w|spacemacs/ivy-persp-switch-project (Workspace)|ワークスペースの切替|
 |SPC b W|spacemacs/goto-buffer-workspace|指定したバッファを表示しているワークスペースへ移動、表示がなければ現在のバッファに表示|
 
@@ -93,7 +100,8 @@ M-m p $ t       projectile-multi-term-in-root
 
 ## モードライン
 
-|keybind|unicode|ascii|mode||
+| keybind | unicode | ascii | mode | description |
+| ------- | ------- | ----- | ---- | ----------- |
 |SPC t -|⊝|-|centered-cursor mode|カーソルをウィンドウの中央に維持するモード|
 |SPC t 8|⑧|8|toggle highlight of characters for long lines|長い行をハイライト表示するモード|
 |SPC t C-8|⑧|8|global toggle highlight of characters for long lines|長い行をハイライト表示するモード（グローバル）|
@@ -123,12 +131,11 @@ M-m p $ t       projectile-multi-term-in-root
 |SPC t C-W|Ⓦ|W|automatic whitespace cleanup globally|保存時に行末などの不要な空白を削除（グローバル）|
 |SPC t y|ⓨ|y|yasnippet mode|スニペットモード|
 
-https://github.com/DarthFennec/highlight-indent-guides
-https://github.com/zk-phi/indent-guide
-https://github.com/Malabarba/aggressive-indent-mode
-https://github.com/Fuco1/smartparens
+- https://github.com/zk-phi/indent-guide
+- https://github.com/Malabarba/aggressive-indent-mode
+- https://github.com/Fuco1/smartparens
 
-### 
+### all-the-icons
 
 ```elisp
    dotspacemacs-mode-line-theme (if (display-graphic-p)
@@ -144,10 +151,11 @@ https://github.com/Fuco1/smartparens
 
 Emacs-Lispは有効になっていなかったので追加する `(spacemacs/add-flycheck-hook 'emacs-lisp-mode)`
 
+| keybind | description |
+| ------- | ----------- |
 |SPC e v|flycheckの設定を確認|
 |SPC e l|すべてのエラーのリストを表示します|
 |SPC e .||
-
 
 ## Emcas Lisp
 
@@ -156,46 +164,35 @@ Emacs-Lispは有効になっていなかったので追加する `(spacemacs/add
 
 ## Reference
 
-Emacsの補完と検索を超強化する
-https://qiita.com/blue0513/items/c0dc35a880170997c3f5
-Emacsの検索機能を使いこなす
-http://dev.ariel-networks.com/articles/emacs/part1/
+- [Emacsの補完と検索を超強化する](https://qiita.com/blue0513/items/c0dc35a880170997c3f5)
+- [Emacsの検索機能を使いこなす](http://dev.ariel-networks.com/articles/emacs/part1/)
+- https://www.reddit.com/r/emacs/comments/cfag4z/emacsp0rn_emacs_with_a_slick_ui_link_in_comments/
+- https://github.com/ianpan870102/.emacs.d
+- https://github.com/ianpan870102/.use-package.emacs.d
+- https://github.com/cy20lin/.spacemacs.d
+- https://github.com/yoshidaster/emacs-config
+- https://github.com/jupl/.spacemacs.d
+- https://github.com/drgeb/spacemacs
+- https://sriramkswamy.github.io/dotemacs/
+- [EmacsWiki](https://www.emacswiki.org/emacs/サイトマップ)
 
-https://www.reddit.com/r/emacs/comments/cfag4z/emacsp0rn_emacs_with_a_slick_ui_link_in_comments/
-https://github.com/ianpan870102/.emacs.d
-https://github.com/ianpan870102/.use-package.emacs.d
-
-https://github.com/cy20lin/.spacemacs.d
-https://github.com/yoshidaster/emacs-config
-https://github.com/jupl/.spacemacs.d
-https://github.com/drgeb/spacemacs
-
-https://sriramkswamy.github.io/dotemacs/
-
-
-EmacsWiki
-https://www.emacswiki.org/emacs/サイトマップ
+- https://with-emacs.com/posts/editing/show-matching-lines-when-parentheses-go-off-screen/
 
 ## Package Manager
 
-https://nukosuke.hatenablog.jp/entry/straight-el
-https://emacs-jp.github.io/packages/package-management/package-el
-http://emacs.rubikitch.com/use-package-2/
+- https://nukosuke.hatenablog.jp/entry/straight-el
+- https://emacs-jp.github.io/packages/package-management/package-el
+- http://emacs.rubikitch.com/use-package-2/
 
-## terminal
+## Terminal
 
-https://github.com/dieggsy/eterm-256color
-
-emacs上のterm.elで正しくansi colorを256色表示する方法
-http://geekna.hatenablog.jp/entry/20130901/p1
-Emacs上のターミナルを最強に: term+.el
-https://tarao.hatenablog.com/entry/20121021/1350844264
-
+- https://github.com/dieggsy/eterm-256color
+- [emacs上のterm.elで正しくansi colorを256色表示する方法](http://geekna.hatenablog.jp/entry/20130901/p1)
+- [Emacs上のターミナルを最強に: term+.el](https://tarao.hatenablog.com/entry/20121021/1350844264)
 
 ## Theme
 
 `dotspacemacs-configuration-layers` に `themes-megapack` を追加して、 `dotspacemacs-themes` に `dracula` を追加
-
 
 ## Migration
 
@@ -209,7 +206,6 @@ https://tarao.hatenablog.com/entry/20121021/1350844264
 
 https://github.com/railwaycat/homebrew-emacsmacport
 https://bitbucket.org/mituharu/emacs-mac/src/master/
-
 
 ## org-mode
 
