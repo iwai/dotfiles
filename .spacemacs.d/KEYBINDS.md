@@ -79,7 +79,7 @@
 |DEL|delete-backward-char|カーソル位置の一文字前を削除|
 |C-x C-o|delete-blank-lines|空行を削除|
 ||||
-|M-\|delete-horizontal-space||
+|M-\\|delete-horizontal-space||
 |M-^|delete-indentation||
 
 ## マーク
@@ -87,7 +87,7 @@
 | keybind | command | description |
 | ------- | ------- | ----------- |
 |C-SPC|set-mark-command|カーソル位置をマーク|
-|C-x SPC|rectangle-mark-mode|矩形選択開始位置をマーク（通常のマーク中に実行すると矩形選択モードに変わる） |
+|C-x SPC|rectangle-mark-mode|矩形選択開始位置をマーク<br>（通常のマーク中に実行すると矩形選択モードに変わる） |
 ||||
 |C-@|set-mark-command|カーソル位置をマーク|
 |M-h|mark-paragraph|現在の段落をマーク|
@@ -183,14 +183,14 @@
 
 | keybind | command | description |
 | ------- | ------- | ----------- |
-|M-s o|occur|現在のバッファから検索文字列にヒットした行を **Occur** バッファに表示します|
-||mutli-occur|指定した複数のバッファを対象に検索文字列にヒットした行を **Occur** バッファに表示します|
+|M-s o|occur|現在のバッファから検索文字列にヒットした行を \*\*Occur\*\* バッファに表示します|
+||mutli-occur|指定した複数のバッファを対象に検索文字列にヒットした行を \*\*Occur\*\* バッファに表示します|
 
 ### occur-mode
 
 | keybind | command | description |
 | ------- | ------- | ----------- |
-|e|occur-edit-mode|編集モード（編集された内容は元のバッファへ反映されます） C-c C-c で編集モード終了|
+|e|occur-edit-mode|編集モード（編集された内容は元のバッファへ反映されます）<br> C-c C-c で編集モード終了|
 |RET|occur-mode-goto-occurrence|抽出された行の元のバッファへ移動|
 |C-c C-c|occur-mode-goto-occurrence|抽出された行の元のバッファへ移動|
 |C-c C-f|next-error-follow-minor-mode|抽出された行の元のバッファを追随して移動|
@@ -246,7 +246,7 @@
 ||||
 |C-z|suspend-frame||
 |C-]|abort-recursive-edit||
-|C-\|toggle-input-method||
+|C-\\|toggle-input-method||
 |C-h|help-command||
 
 
