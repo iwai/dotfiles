@@ -82,15 +82,17 @@ Each entry is either:
       )
     :config
     (progn
-      (setq posframe-arghandler #'my-posframe-arghandler)
 
-      (defun my-posframe-arghandler (posframe-buffer arg-name value)
-        (if posframe-buffer
-            (message "%s %s: %s" posframe-buffer arg-name value)
-            )
-        ;; (let ((info '(:internal-border-width 10 :background-color "green")))
-        ;;   (or (plist-get info arg-name) value))
-        value)
+      ;; debug message
+      ;; (setq posframe-arghandler #'my-posframe-arghandler)
+
+      ;; (defun my-posframe-arghandler (posframe-buffer arg-name value)
+      ;;   (if posframe-buffer
+      ;;       (message "%s %s: %s" posframe-buffer arg-name value)
+      ;;       )
+      ;;   ;; (let ((info '(:internal-border-width 10 :background-color "green")))
+      ;;   ;;   (or (plist-get info arg-name) value))
+      ;;   value)
       )
     :custom
     (ivy-posframe-border-width 3)
