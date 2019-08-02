@@ -85,6 +85,7 @@ This function should only modify configuration layer settings."
      ;; -- private layers
      fzf
      my-posframe
+     my-defaults
      )
 
    ;; List of additional packages that will be installed without being
@@ -583,9 +584,7 @@ you should place your code here."
     ;; https://memo.sugyan.com/entry/20120228/1330392943
     (define-key evil-emacs-state-map (kbd "C-,") 'other-window)
     )
-
-  (setq yas-snippet-dirs
-        '("~/.spacemacs.d/snippets"))
+  
   (setq persistent-scratch-save-file "~/.spacemacs.d/.persistent-scratch")
   (persistent-scratch-setup-default)
 

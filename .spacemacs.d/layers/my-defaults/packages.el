@@ -30,7 +30,10 @@
 ;;; Code:
 
 (defconst my-defaults-packages
-  '(org)
+  '(
+    org
+    yasnippet
+    )
   "The list of Lisp packages required by the my-defaults layer.
 
 Each entry is either:
@@ -59,7 +62,7 @@ Each entry is either:
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
 
-(defun my-defaults/pre-init-org ()
+(defun my-defaults/post-init-org ()
   (spacemacs|use-package-add-hook org
     :post-config
     (progn
@@ -76,5 +79,14 @@ Each entry is either:
       (add-hook 'org-mode-hook 'my/org-mode-hook)
 
       )))
+
+(defun my-defaults/post-init-yasnippet ()
+  (spacemacs|use-package-add-hook yasnippet
+    :post-init
+    (progn
+      (add-to-list 'yas-snippet-dirs yas-installed-snippets-dir)
+
+      )))
+
 
 ;;; packages.el ends here
