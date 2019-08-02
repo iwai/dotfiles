@@ -567,12 +567,20 @@ you should place your code here."
 
   ;; http://malkalech.com/emacs_c-h_backspace
   (define-key evil-emacs-state-map (kbd "C-h") (kbd "<DEL>"))
+  (define-key counsel-mode-map (kbd "C-h") (kbd "<DEL>"))
+
+  ;;(define-key minibuffer-inactive-mode-map (kbd "C-h") (kbd "<DEL>"))
+
   ;;(define-key key-translation-map [?\C-h] [?\C-?])
   ;;(bind-key* "C-h" 'delete-backward-char)
+  ;; minibuffer-inactive-mode
 
   ;; 選択している範囲がある場合はその文字列を初期検索するように変更
   (define-key evil-emacs-state-map (kbd "C-s") 'swiper-thing-at-point)
   (define-key evil-emacs-state-map (kbd "C-r") 'swiper-thing-at-point)
+  ;; https://github.com/abo-abo/swiper/issues/1525
+  ;; counsel-file-jump は非同期じゃないらしいので counsel-fzf にしてみるの巻き
+  (define-key evil-emacs-state-map (kbd "C-x C-f") 'counsel-fzf)
   ;; https://github.com/abo-abo/swiper/issues/2137
   (define-key ivy-minibuffer-map (kbd "C-r") 'ivy-previous-line-or-history)
 
@@ -583,6 +591,7 @@ you should place your code here."
 
     ;; https://memo.sugyan.com/entry/20120228/1330392943
     (define-key evil-emacs-state-map (kbd "C-,") 'other-window)
+    (define-key counsel-mode-map (kbd "C-,") 'other-window)
     )
   
   (setq persistent-scratch-save-file "~/.spacemacs.d/.persistent-scratch")
