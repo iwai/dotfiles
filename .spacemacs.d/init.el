@@ -68,7 +68,8 @@ This function should only modify configuration layer settings."
      auto-completion
      syntax-checking
 
-     ivy
+     (ivy :variables
+          ivy-enable-advanced-buffer-information t)
      git
      (version-control :variables
                       version-control-diff-tool 'diff-hl
