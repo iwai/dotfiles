@@ -11,3 +11,5 @@
 
 .config/direnv/allow/
 .config/anyenv/
+
+.spacemacs.d/.spacemacs.env
