@@ -33,6 +33,8 @@
   '(
     org
     yasnippet
+    treemacs
+    doom-themes
     )
   "The list of Lisp packages required by the my-defaults layer.
 
@@ -88,5 +90,17 @@ Each entry is either:
 
       )))
 
+(defun my-defaults/post-init-treemacs ()
+  (spacemacs|use-package-add-hook treemacs
+    :post-config
+    (progn
+      (treemacs-follow-mode -1)
+      )))
+
+(defun my-defaults/init-doom-themes ()
+  (use-package doom-themes
+    :config
+    (doom-themes-treemacs-config)
+    ))
 
 ;;; packages.el ends here
