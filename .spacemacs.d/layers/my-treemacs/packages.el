@@ -81,11 +81,11 @@ Each entry is either:
 
 (defun my-treemacs/init-treemacs ()
   (use-package treemacs
-    :commands (treemacs-select-window treemacs--window-number-ten)
+    :commands (treemacs-select-window treemacs--window-number-ten treemacs-current-visibility)
     :defer t
     :init
     (spacemacs/set-leader-keys
-      "ft"    #'treemacs-toggle
+      "ft"    #'treemacs
       "fT"    #'treemacs
       "fB"    #'treemacs-bookmark
       "f C-t" #'treemacs-find-file)
@@ -93,7 +93,6 @@ Each entry is either:
     (progn
       ;;(spacemacs/define-evil-state-face "treemacs" "MediumPurple1")
       (setq treemacs-no-png-images t
-            treemacs-follow-after-init t
             treemacs-width 30
             treemacs-position 'left
             treemacs-is-never-other-window nil
@@ -106,7 +105,7 @@ Each entry is either:
             treemacs-goto-tag-strategy 'refetch-index
             ;;treemacs-collapse-dirs treemacs-use-collapsed-directories
             )
-
+      (treemacs-follow-mode -1)
       ;; (when treemacs-use-follow-mode
       ;;   (treemacs-follow-mode t))
       ;; (when treemacs-use-filewatch-mode
@@ -121,13 +120,19 @@ Each entry is either:
 
 (defun my-treemacs/init-treemacs-projectile ()
   (use-package treemacs-projectile
+    :commands (treemacs--projectile-current-user-project-function)
     :defer t
     :init
     (spacemacs/set-leader-keys
-      "fp" #'treemacs-projectile-toggle
-      "fP" #'treemacs-projectile)))
+      "fp" #'my-treemacs-projectile-toggle
+      "fP" #'treemacs-projectile
+      "pt" #'my-treemacs-projectile-toggle)))
 
-(defun my-treemacs/init-treemacs-magit ())
+(defun my-treemacs/init-treemacs-magit ()
+  (use-package treemacs-magit
+    :defer t
+    :after treemacs magit
+    ))
 
 
 ;;; packages.el ends here
