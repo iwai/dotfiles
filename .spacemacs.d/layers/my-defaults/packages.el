@@ -31,6 +31,7 @@
 
 (defconst my-defaults-packages
   '(
+    direnv
     org
     yasnippet
     treemacs
@@ -62,7 +63,6 @@ Each entry is either:
 
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
-
 
 (defun my-defaults/post-init-org ()
   (spacemacs|use-package-add-hook org
@@ -102,5 +102,10 @@ Each entry is either:
     :config
     (doom-themes-treemacs-config)
     ))
+
+(defun my-defaults/init-direnv ()
+  (use-package direnv
+    :config
+    (direnv-mode)))
 
 ;;; packages.el ends here
