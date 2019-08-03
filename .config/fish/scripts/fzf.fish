@@ -18,7 +18,9 @@ function fzf_change_directory -d 'fzf change directory'
         end
 
     else
-        set -l recent (z -l | awk '{print $2}' | grep -v '^/$' | grep -v '^/Users$')
+        # Cleaning removed directries
+        z --clean >/dev/null
+        set -l recent (z -l 2>/dev/null | awk '{print $2}' | grep "^$HOME")
 
         find $recent -maxdepth 2 -type d -name '.git' -prune -o -type d -print \
         | perl -pe "s#$HOME#~#" \
