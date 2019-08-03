@@ -288,6 +288,41 @@
 |M-&|async-shell-command|非同期シェルコマンドを実行|
 |M-&#124;|shell-command-on-region|範囲を標準入力にしてシェルコマンドを実行|
 
+## 補完
+
+| keybind | command | description |
+| ------- | ------- | ----------- |
+|M-/|hippie-expand|カーソル1文字前の単語の展開を試す（動的略語展開）|
+|SPC i s|spacemacs/ivy-yas|yasnippetの一覧から選択して挿入|
+
+
+### hippie-expand
+
+`hippie-expand-try-functions-list` で指定された展開関数にて展開を実施します、また、リストは優先順位により並んでいます、現在指定されている関数は下記。
+
+| function | description |
+| -------- | ----------- |
+|yas-hippie-try-expand|yasnippet の展開|
+|try-expand-dabbrev|現在のバッファ内から動的略語展開|
+|try-expand-dabbrev-all-buffers|現在のバッファ内から動的略語展開|
+|try-expand-dabbrev-from-kill|現在開いているバッファ全てから動的略語展開|
+|try-complete-file-name-partially|ファイル名の補完|
+|try-complete-file-name|ファイル名の補完|
+|try-expand-all-abbrevs|すべての略語表から展開 略語表一覧（abbrev-table-name-list）|
+|try-expand-list||
+|try-expand-line||
+|try-complete-lisp-symbol-partially|Lispシンボルから補完|
+|try-complete-lisp-symbol|Lispシンボルから補完|
+
+### auto-yasnippet
+
+| keybind | command | description |
+| ------- | ------- | ----------- |
+|M-m i S c|aya-create||
+
+
+
+
 ## リンク
 
 - [Emacs の Prefix Key とお約束ごと](https://qiita.com/lazy_dog/items/cfeffe30efd4b32703b1)
