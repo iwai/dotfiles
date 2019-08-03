@@ -72,7 +72,10 @@ Each entry is either:
               (complete-symbol   . ivy-posframe-display-at-point)
               (counsel-M-x       . ivy-posframe-display-at-window-bottom-left)
               (ivy-switch-buffer . ivy-posframe-display-at-window-bottom-left)
-              (counsel-find-file . ivy-posframe-display-at-window-bottom-left)))
+              (counsel-find-file . ivy-posframe-display-at-window-bottom-left)
+              (counsel-fzf       . ivy-posframe-display-at-window-bottom-left)
+              (ivy-yasnippet     . ivy-posframe-display-at-window-bottom-left)
+              ))
 
       (setq ivy-posframe-height-alist
             '(
