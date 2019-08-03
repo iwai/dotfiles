@@ -1,4 +1,6 @@
 
+# TODO fdコマンドがある場合は、そっちを利用できるように対応
+
 function fzf_change_directory -d 'fzf change directory'
 
     if [ $argv ]
