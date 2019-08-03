@@ -47,13 +47,13 @@
 
 | keybind | command | description |
 | ------- | ------- | ----------- |
-|SPC jb|avy-pop-mark|
-|SPC jj|evil-avy-goto-char|
-|SPC jJ|evil-avy-goto-char-2|
-|SPC jl|evil-avy-goto-line|
-|SPC ju|spacemacs/avy-goto-url|
-|SPC jw|evil-avy-goto-word-or-subword-1|
-|SPC xo|spacemacs/avy-open-url|
+|SPC j b|avy-pop-mark|
+|SPC j j|evil-avy-goto-char|
+|SPC j J|evil-avy-goto-char-2|
+|SPC j l|evil-avy-goto-line|
+|SPC j u|spacemacs/avy-goto-url|
+|SPC j w|evil-avy-goto-word-or-subword-1|
+|SPC x o|spacemacs/avy-open-url|
 
 ## 改行／インデント
 
