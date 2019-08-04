@@ -531,20 +531,33 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (when (cond ((and (>= emacs-major-version 23)
                     (display-graphic-p))
-               ;; 12pt設定じゃないと綺麗な等幅にならない...
-               ;; https://shino.tumblr.com/post/25720825967/等幅フォントでは3-の倍数以外のフォントサイズを使用すると半角文字と全角文字の横幅比が-12
-               (set-face-attribute 'default nil
-                                   :family "RictyDiminished Nerd Font"
-                                   :height 120)
-               (set-fontset-font (frame-parameter nil 'font)
-                                 'japanese-jisx0208
-                                 (cons "RictyDiminished Nerd Font" "iso10646-1"))
-               (set-fontset-font (frame-parameter nil 'font)
-                                 'japanese-jisx0212
-                                 (cons "RictyDiminished Nerd Font" "iso10646-1"))
-               (set-fontset-font (frame-parameter nil 'font)
-                                 'katakana-jisx0201
-                                 (cons "RictyDiminished Nerd Font" "iso10646-1"))
+
+               (setq default-font-family "RictyDiminished Nerd Font")
+
+               (set-face-attribute 'default nil     :family default-font-family)
+               ;; markdown-modeのテーブルが fixed-pitch を継承していて、Monospace指定だったので変更
+               (set-face-attribute 'fixed-pitch nil :family default-font-family)
+
+               (defun set-japanese-font (family)
+                 (set-fontset-font (frame-parameter nil 'font) 'japanese-jisx0208 (font-spec :family family))
+                 (set-fontset-font (frame-parameter nil 'font) 'japanese-jisx0212 (font-spec :family family))
+                 (set-fontset-font (frame-parameter nil 'font) 'katakana-jisx0201 (font-spec :family family)))
+
+               ;; Overwrite latin and greek char's font
+               (defun set-latin-and-greek-font (family)
+                 (set-fontset-font (frame-parameter nil 'font) '(#x0250 . #x02AF) (font-spec :family family)) ; IPA extensions
+                 (set-fontset-font (frame-parameter nil 'font) '(#x00A0 . #x00FF) (font-spec :family family)) ; latin-1
+                 (set-fontset-font (frame-parameter nil 'font) '(#x0100 . #x017F) (font-spec :family family)) ; latin extended-A
+                 (set-fontset-font (frame-parameter nil 'font) '(#x0180 . #x024F) (font-spec :family family)) ; latin extended-B
+                 (set-fontset-font (frame-parameter nil 'font) '(#x2018 . #x2019) (font-spec :family family)) ; end quote
+                 (set-fontset-font (frame-parameter nil 'font) '(#x2588 . #x2588) (font-spec :family family)) ; █
+                 (set-fontset-font (frame-parameter nil 'font) '(#x2500 . #x2500) (font-spec :family family)) ; ─
+                 (set-fontset-font (frame-parameter nil 'font) '(#x2504 . #x257F) (font-spec :family family)) ; box character
+                 (set-fontset-font (frame-parameter nil 'font) '(#x0370 . #x03FF) (font-spec :family family)))
+
+               (set-japanese-font default-font-family)
+               (set-latin-and-greek-font default-font-family)
+
                )))
 
   )
