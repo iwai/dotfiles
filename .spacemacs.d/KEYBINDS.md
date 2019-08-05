@@ -259,29 +259,29 @@
 | -------    | -------            | ----------- |
 | C-u        | universal-argument |             |
 | C-0 .. C-9 | digit-argument     |             |
-| M-0 .. M-9 | digit-argument     |             |
 | C--        | negative-argument  |             |
 | M--        | negative-argument  |             |
 
 ## ウィンドウ操作
 
-| keybind | command                             | description                                |
-| ------- | -------                             | -----------                                |
-| C-l     | recenter-top-bottom                 | 現在行がウィンドウの中央に表示             |
-| C-x 0   | delete-window                       | ウィンドウを削除                           |
-| C-x 1   | spacemacs/toggle-maximize-buffer    | アクティブウィンドウを全画面表示（トグル） |
-| C-x 2   | split-window-below                  | ウィンドウを上下分割                       |
-| C-x 3   | split-window-right                  | ウィンドウを左右分割                       |
-| C-x o   | other-window                        | 次のウィンドウへ移動                       |
-| C-x +   | balance-windows                     | すべてのウィンドウの高さを同じにする       |
-| C-x -   | shrink-window-if-larger-than-buffer | バッファに合わせてウィンドウを縮小         |
-|         |                                     |                                            |
-| C-M-l   | reposition-window                   |                                            |
-| C-x ^   | enlarge-window                      |                                            |
-| C-x {   | shrink-window-horizontally          |                                            |
-| C-x }   | enlarge-window-horizontally         |                                            |
-| C-M-v   | scroll-other-window                 |                                            |
-| C-M-S-v | scroll-other-window-down            |                                            |
+| keybind    | command                             | description                                |
+| -------    | -------                             | -----------                                |
+| C-l        | recenter-top-bottom                 | 現在行がウィンドウの中央に表示             |
+| C-x 0      | delete-window                       | ウィンドウを削除                           |
+| C-x 1      | spacemacs/toggle-maximize-buffer    | アクティブウィンドウを全画面表示（トグル） |
+| C-x 2      | split-window-below                  | ウィンドウを上下分割                       |
+| C-x 3      | split-window-right                  | ウィンドウを左右分割                       |
+| C-x o      | other-window                        | 次のウィンドウへ移動                       |
+| C-x +      | balance-windows                     | すべてのウィンドウの高さを同じにする       |
+| C-x -      | shrink-window-if-larger-than-buffer | バッファに合わせてウィンドウを縮小         |
+| M-0 .. M-9 | winum-select-window-N               | 指定したウィンドウに移動                   |
+|            |                                     |                                            |
+| C-M-l      | reposition-window                   |                                            |
+| C-x ^      | enlarge-window                      |                                            |
+| C-x {      | shrink-window-horizontally          |                                            |
+| C-x }      | enlarge-window-horizontally         |                                            |
+| C-M-v      | scroll-other-window                 |                                            |
+| C-M-S-v    | scroll-other-window-down            |                                            |
 
 ## シェル
 
