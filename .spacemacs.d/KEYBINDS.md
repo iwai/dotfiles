@@ -44,8 +44,6 @@
 | C-x [   | backward-page                  |                                                      |
 | C-x ]   | forward-page                   |                                                      |
 
-
-
 ### avy
 
 | keybind | command                         | description |
@@ -379,7 +377,102 @@
 | SPC i u | counsel-unicode-char | Unicode文字入力                                      |
 
 
+## Region
 
+| command                              | description                                                      |         |
+| ---                                  | ---                                                              |         |
+| apply-macro-to-region-lines          | 領域内で始まる各行で最後のキーボードマクロを実行                 |         |
+| avy-copy-region                      | 2行を選択し、それらの間のテキストをコピーしてポイント            |         |
+| avy-kill-region                      | 2行を選択してそれらの間の領域を削除                              |         |
+| avy-kill-ring-save-region            | 2行を選択し、それらの間の領域をキルリングに保存                  |         |
+| avy-move-region                      | 2行を選択し、それらの間のテキストを現在の行の上に移動            |         |
+| avy-move-region                      | 2行を選択し、それらの間のテキストを現在の行の上に移動            |         |
+| base64-encode-region                 | 選択された範囲をbase64エンコードに変更                           |         |
+| base64-decode-region                 | 選択された範囲をbase64デコードに変更                             |         |
+| binhex-decode-region                 |                                                                  |         |
+| browse-url-of-region                 | 選択された範囲をHTMLソースとしてブラウザで表示                   |         |
+| canonically-space-region             | 選択された範囲内の単語間の余分なスペースを削除                   |         |
+| center-region                        | 選択された範囲を中央揃え                                         |         |
+| comment-or-uncomment-region          | 選択された範囲をコメントもしくは非コメント                       |         |
+| comment-region                       | 選択された範囲をコメント                                         |         |
+| count-words-region(count-words)      | 選択された範囲の行数、単語数、文字数をカウント                   | M-=     |
+| count-region                         | 選択された範囲の行数、単語数、文字数をカウント                   | M-m x c |
+| delete-region                        | 選択された範囲の削除（kill ringは変更しない）                    |         |
+| delimit-columns-region               | 選択された範囲のテキストを整理                                   |         |
+| capitalize-region                    | 選択された範囲の単語の頭文字を大文字に変換                       |         |
+| downcase-region                      | 選択された範囲の文字を小文字に変換                               | C-x C-l |
+| denato-region                        | 選択された範囲の文字をNATO発音から戻す                           |         |
+| ediff-regions-linewise               | 指定されたバッファ内の一対の範囲に対してediffを実行（行単位）    |         |
+| ediff-regions-wordwise               | 指定されたバッファ内の一対の範囲に対してediffを実行（単語単位）  |         |
+| encode-coding-region                 | 選択された範囲を指定されたコーディングシステムでエンコードをする |         |
+| er/expand-region                     | 意味単位の範囲選択を行う                                         | M-m v   |
+| eval-region                          | 選択された範囲のLispコードを実行                                 |         |
+| expand-region-abbrevs                | 選択された範囲内の略語を展開                                     |         |
+| fill-region                          |                                                                  |         |
+| fill-region-as-paragraph             |                                                                  |         |
+| flyspell-region                      |                                                                  |         |
+| format-decode-region                 | 選択された範囲をデコード                                         |         |
+| format-encode-region                 | 選択された範囲をエンコード                                       |         |
+| gh-md-render-region                  | 選択された範囲をgithub markdownとしてプレビュー                  |         |
+| htmlize-region                       | 選択された範囲を色と装飾を維持しながらHTMLに変換                 |         |
+| japanese-hankaku-region              | 全角を半角へ変換                                                 |         |
+| japanese-hiragana-region             | カタカナをひらがなへ変換                                         |         |
+| japanese-katakana-region             | ひらがなをカタカナへ変換                                         |         |
+| japanese-zenkaku-region              | 半角を全角へ変換                                                 |         |
+| kkc-region                           | かな文字列を漢字かな混在文字列に変換                             |         |
+| json-reformat-region                 | 選択された範囲のjsonを整形                                       |         |
+| mail-decode-encoded-word-region      |                                                                  |         |
+| mail-quote-printable-region          |                                                                  |         |
+| mail-unquote-printable-region        |                                                                  |         |
+| metamail-region                      |                                                                  |         |
+| mml-quote-region                     |                                                                  |         |
+| markdown-blockquote-region           |                                                                  |         |
+| markdown-complete-region             |                                                                  |         |
+| markdown-exdent-region               |                                                                  |         |
+| markdown-indent-region               |                                                                  |         |
+| markdown-outdent-region              |                                                                  |         |
+| markdown-pre-region                  |                                                                  |         |
+| markdown-table-convert-region        |                                                                  |         |
+| markdown-unfontify-region-wiki-links |                                                                  |         |
+| mmm-clear-current-region             |                                                                  |         |
+| mmm-end-current-region               |                                                                  |         |
+| mmm-ify-region                       |                                                                  |         |
+| mmm-insert-region                    |                                                                  |         |
+| mmm-parse-region                     |                                                                  |         |
+| mmm-reparse-current-region           |                                                                  |         |
+| morse-region                         |                                                                  |         |
+| move-text-region                     |                                                                  |         |
+| move-text-region-down                |                                                                  |         |
+| move-text-region-up                  |                                                                  |         |
+| reverse-region                       |                                                                  |         |
+| shell-command-on-region              |                                                                  |         |
+| epa-decrypt-armor-in-region          | 選択された範囲のOpenPGPで暗号テキストを復号化                    |         |
+| epa-decrypt-armor-in-region          |                                                                  |         |
+| epa-decrypt-region                   |                                                                  |         |
+| epa-encrypt-region                   |                                                                  |         |
+| epa-import-armor-in-region           |                                                                  |         |
+| epa-import-keys-region               |                                                                  |         |
+| epa-sign-region                      |                                                                  |         |
+| epa-verify-cleartext-in-region       |                                                                  |         |
+| epa-verify-region                    |                                                                  |         |
+
+- https://github.com/emacs-pe/gh-md.el
+- https://github.com/gongo/json-reformat#configuration
+
+## ファンクションキー
+
+| keybind | command                              | description |
+| ---     | ---                                  | ---         |
+| <f1>    | help-command                         |             |
+| <f2>    | 2C-command                           |             |
+| <f3>    | kmacro-start-macro-or-insert-counter |             |
+| <f4>    | kmacro-end-or-call-macro             |             |
+| <f6>    | ivy-resume                           |             |
+| <f10>   | menu-bar-open                        |             |
+| <f11>   | toggle-frame-fullscreen              |             |
+| <f16>   | clipboard-kill-ring-save             |             |
+| <f18>   | clipboard-yank                       |             |
+| <f20>   | clipboard-kill-region                |             |
 
 ## リンク
 
