@@ -31,11 +31,21 @@
 
 (defconst my-defaults-packages
   '(
+    ;; appearance
+    doom-themes
+
+    ;; general
+    swiper
+    multiple-cursors
+
+    ;; additional
     direnv
+
+    ;; customize
     org
     yasnippet
     treemacs
-    doom-themes
+    go-mode
     )
   "The list of Lisp packages required by the my-defaults layer.
 
@@ -63,6 +73,37 @@ Each entry is either:
 
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
+
+(defun my-defaults/init-doom-themes ()
+  (use-package doom-themes
+    :config
+    (doom-themes-treemacs-config)
+    ))
+
+
+(defun my-defaults/pre-init-swiper ()
+  (spacemacs|use-package-add-hook swiper
+    :post-config
+    (progn
+      (setq ivy-count-format "(%d/%d) ")
+      ;; 範囲指定されている文字列を検索
+      (define-key evil-emacs-state-map (kbd "C-s") 'my/swiper-region)
+      (define-key evil-emacs-state-map (kbd "C-r") 'my/swiper-region)
+
+      ;; https://github.com/abo-abo/swiper/issues/2137
+      (define-key ivy-minibuffer-map (kbd "C-r") 'ivy-previous-line-or-history)
+
+      )))
+
+(defun my-defaults/pre-init-multiple-cursors ()
+  (spacemacs|use-package-add-hook multiple-cursors
+    :post-init
+    (progn
+      (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+      (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+      (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+      (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+      )))
 
 (defun my-defaults/post-init-org ()
   (spacemacs|use-package-add-hook org
@@ -97,11 +138,18 @@ Each entry is either:
       (treemacs-follow-mode -1)
       )))
 
-(defun my-defaults/init-doom-themes ()
-  (use-package doom-themes
-    :config
-    (doom-themes-treemacs-config)
-    ))
+(defun my-defaults/post-init-go-mode ()
+  (spacemacs|use-package-add-hook go-mode
+    :post-config
+    (progn
+      ;; (defun my-defaults//go-mode-hook ()
+      ;;   ;; (message "%s" "run hook")
+      ;;   (make-variable-buffer-local 'compile-command)
+      ;;   (set compile-command "go build -v"))
+      ;;   ;; (set (make-local-variable 'compile-command)
+      ;;   ;;      "go build -v"))
+      ;; (add-hook 'go-mode-hook 'my-defaults//go-mode-hook t)
+      )))
 
 (defun my-defaults/init-direnv ()
   (use-package direnv
