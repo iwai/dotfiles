@@ -133,6 +133,17 @@
 | C-o     | open-rectangle         | 矩形選択範囲に空文字を挿入           |
 | C-x r N | rectangle-number-lines | 矩形領域の左端に行番号を挿入         |
 
+### multiple-cursors
+
+| keybind     | command                    | description                                      |
+| -------     | -------                    | -----------                                      |
+| C-S-c C-S-c | mc/edit-lines              | 指定範囲の各行にカーソルを追加                   |
+| C->         | mc/mark-next-like-this     | 次の行にカーソルを追加                           |
+| C-<         | mc/mark-previous-like-this | 前の行にカーソルを追加                           |
+| C-c C-<     | mc/mark-all-like-this      |                                                  |
+| SPC s m a   | mc/mark-all-dwim           | 複数の行にまたがるマッチする箇所にカーソルを追加 |
+|             |                            |                                                  |
+
 ## 大文字小文字変換
 
 | keybind | command         | description                    |
