@@ -341,9 +341,42 @@
 | ------- | -------   | -----------                      |
 | SPC c C | compile   | コンパイルコマンドを指定して実行 |
 | SPC c r | recompile | 再コンパイル                     |
-| keybind | command | description |
-| ------- | ------- | ----------- |
-|M-m i S c|aya-create||
+
+## ivy/counsel
+
+スペース区切りの正規表現マッチングに対応したさまざまな関数を提供してくれます、このマッチングはivyにより実現されています。
+正規表現をオフにする場合、入力中に`M-r (ivy-toggle-regexp-quote)` により完全一致にマッチング動作を変更できます。
+
+`counsel-mode` を有効にすることで、Emacsの標準関数はcounselに置き換えられます。
+
+| Keybind   | Emacs command              | Counsel equivalent           | Description                                                        |
+| --------- | -------------------------- | ---------------------------- | ------------------------------------------------------------------ |
+| M-x       | execute-extended-command   | counsel-M-x                  | コマンド名を指定して実行                                           |
+| C-x C-f   | find-file                  | counsel-find-file            | ファイルを開く                                                     |
+| M-y       | yank-pop                   | counsel-yank-pop             | 過去に切り取りコピーした文字列を選択して貼り付け                   |
+| M-?       | describe-bindings          | counsel-descbinds            | 現在バッファのキーの割り当て表（マイナーモードからグローバルまで） |
+| \<f1\> f  | describe-function          | counsel-describe-function    | 指定されたLisp関数のドキュメントを表示                             |
+| \<f1\> v  | describe-variable          | counsel-describe-variable    | 指定されたLisp変数のドキュメントを表示                             |
+| \<f1\> a  | apropos-command            | counsel-apropos              | 指定した文字列を含むコマンドのリストを表示                         |
+| \<f1\> S  | info-lookup-symbol         | counsel-info-lookup-symbol   | 指定したシンボルに対応したInfoを表示                               |
+| SPC h d F | describe-face              | counsel-describe-face        | 指定されたfaceのドキュメントを表示                                 |
+| SPC f e l | find-library               | counsel-find-library         | 指定したライブラリを表示                                           |
+|           | list-faces-display         | counsel-faces                | 現在定義されているフェイス一覧                                     |
+|           | imenu                      | counsel-imenu                | ファイル内の主要な定義を検索して移動                               |
+|           | load-library               | counsel-load-library         | load-path内含む指定されたライブラリを読み込み                      |
+| SPC T m   | load-theme                 | counsel-load-theme           | 指定したテーマを読み込み                                           |
+| SPC r m   | pop-to-mark-command        | counsel-mark-ring            | 過去にマークした履歴を選択して移動                                 |
+| SPC f b   | bookmark-jump              | counsel-bookmark             | ブックマークを開く                                                 |
+
+| keybind | command              | description                                          |
+| ------- | -------              | -----------                                          |
+|         | counsel-compile      | コンパイルコマンドの指定もしくは履歴指定でコンパイル |
+|         | counsel-git          | 現在のGitリポジトリのファイルを開く                  |
+|         | counsel-git-grep     | 現在のGitリポジトリファイルを対象にgrepを実行        |
+|         | counsel-ag           | 現在のディレクトリを対象にag                         |
+|         | counsel-rg           | 現在のディレクトリを対象にrg                         |
+| SPC f L | counsel-locate       | locateコマンドによる検索                             |
+| SPC i u | counsel-unicode-char | Unicode文字入力                                      |
 
 
 
