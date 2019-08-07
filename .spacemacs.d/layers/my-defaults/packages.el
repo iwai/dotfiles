@@ -43,6 +43,7 @@
 
     ;; customize
     org
+    markdown-mode
     yasnippet
     treemacs
     lsp-ui
@@ -122,6 +123,16 @@ Each entry is either:
           (set-face-attribute face nil :height 1.0)))
       (add-hook 'org-mode-hook 'my/org-mode-hook)
 
+      )))
+
+(defun my-defaults/post-init-markdown-mode ()
+  (spacemacs|use-package-add-hook markdown-mode
+    :post-config
+    (progn
+      ;; workaround for failed jit-lock-mode same error
+      ;; https://github.com/syl20bnr/spacemacs/issues/12059
+      (remove-hook 'markdown-mode-hook 'orgtbl-mode)
+      (remove-hook 'markdown-mode-hook 'spacemacs//cleanup-org-tables-on-save)
       )))
 
 (defun my-defaults/post-init-yasnippet ()
