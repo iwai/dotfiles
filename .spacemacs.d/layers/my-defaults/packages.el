@@ -45,6 +45,7 @@
     org
     yasnippet
     treemacs
+    lsp-ui
     go-mode
     )
   "The list of Lisp packages required by the my-defaults layer.
@@ -136,6 +137,13 @@ Each entry is either:
     :post-config
     (progn
       (treemacs-follow-mode -1)
+      )))
+
+(defun my-defaults/post-init-lsp-ui ()
+  (spacemacs|use-package-add-hook lsp-ui
+    :post-config
+    (progn
+      (setq lsp-ui-sideline-enable nil)
       )))
 
 (defun my-defaults/post-init-go-mode ()
