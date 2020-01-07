@@ -161,13 +161,11 @@ Each entry is either:
   (spacemacs|use-package-add-hook go-mode
     :post-config
     (progn
-      ;; (defun my-defaults//go-mode-hook ()
-      ;;   ;; (message "%s" "run hook")
-      ;;   (make-variable-buffer-local 'compile-command)
-      ;;   (set compile-command "go build -v"))
-      ;;   ;; (set (make-local-variable 'compile-command)
-      ;;   ;;      "go build -v"))
-      ;; (add-hook 'go-mode-hook 'my-defaults//go-mode-hook t)
+      (if (configuration-layer/layer-used-p 'lsp)
+          (progn
+            (add-hook 'go-mode-hook 'my/dap-for-go-mode t)
+            (remove-hook 'go-mode-hook 'go-eldoc-setup)
+            ))
       )))
 
 (defun my-defaults/init-direnv ()

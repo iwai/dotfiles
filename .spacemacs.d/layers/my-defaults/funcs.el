@@ -7,3 +7,7 @@
                (deactivate-mark)
                (swiper thing)))
     (swiper)))
+
+(defun my/dap-for-go-mode ()
+  (require 'dap-go)
+  (spacemacs/dap-bind-keys-for-mode 'go-mode))

@@ -10,7 +10,6 @@
 
 ```shell
 anyenv install goenv
-anyenv init - fish > ~/._dotfiles/.config/fish/anyenv.fish
-
+anyenv init - fish > ~/._dotfiles/.config/fish/conf.d/anyenv.fish
 ```
 

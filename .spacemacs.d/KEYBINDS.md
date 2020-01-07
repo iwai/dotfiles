@@ -11,7 +11,7 @@
 | ESC     | ESC-prefix                   |                                      |
 | M-o     | Prefix Command               |                                      |
 | M-s     | Prefix Command               |                                      |
-|         |                              |                                      |
+| M-RET   | Prefix Command               | メジャーモードプレフィックスキー     |
 
 ## カーソル移動
 

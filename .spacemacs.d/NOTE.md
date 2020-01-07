@@ -1,12 +1,13 @@
 # SPACEMACS
 
 
+
 ## 日本語フォント
 
 - 12pt設定じゃないと綺麗な等幅にならない...
 - https://shino.tumblr.com/post/25720825967/等幅フォントでは3-の倍数以外のフォントサイズを使用すると半角文字と全角文字の横幅比が-12
-- https://qiita.com/melito/items/238bdf72237290bc6e42
-- https://miyazakikenji.wordpress.com/2016/08/30/日本語-font-の導入/
+- [Emacs のフォント設定について](https://qiita.com/melito/items/238bdf72237290bc6e42)
+- [日本語 font の導入](https://miyazakikenji.wordpress.com/2016/08/30/日本語-font-の導入/)
 - https://github.com/tsunesan3/awsome-jp-coding-fonts
 
 ## lsp-mode
@@ -173,6 +174,8 @@ Emacs-Lispは有効になっていなかったので追加する `(spacemacs/add
 - https://sriramkswamy.github.io/dotemacs/
 - [EmacsWiki](https://www.emacswiki.org/emacs/サイトマップ)
 - https://with-emacs.com/posts/editing/show-matching-lines-when-parentheses-go-off-screen/
+- https://medium.com/@mopemope/個人的に使っているemacsパッケージの話-26260a26fe3b
+- https://ladicle.com/post/config/
 
 ## Package Manager
 
@@ -270,4 +273,138 @@ Emacs-Lispは有効になっていなかったので追加する `(spacemacs/add
 |S|休止時間を保持せず、休止開始時の時刻で時間の計測を中止|
 |C|時間計測そのものをキャンセル|
 
+### Reference
 
+- https://pxaka.tokyo/wiki/emacs:org-tree-slide
+- https://github.com/org-mode-doc-ja/org-ja
+- https://takaxp.github.io/org-ja.html
+- https://sfus.net/blog/2018/12/org-mode-with-ox-hugo/
+- https://qiita.com/takaxp/items/6b2d1e05e7ce4517274d
+- https://github.com/takaxp/emacs.d/blob/d4fb1e356b93a8b236468fdbc30390a2ceaaac04/init-org.el
+
+
+
+C c     |org-capture
+p o     |org-projectile/goto-todos
+a o #   |org-agenda-list-stuck-projects
+a o /   |org-occur-in-agenda-files
+a o a   |org-agenda-list
+a o c   |org-capture
+a o e   |org-store-agenda-views
+a o l   |org-store-link
+a o m   |org-tags-view
+a o o   |org-agenda
+a o p   |org-projectile/capture
+a o s   |org-search-view
+a o t   |org-todo-list
+t m c   |spacemacs/toggle-mode-line-org-clock
+a o B a |org-brain-agenda
+a o B v |org-brain-visualize
+a o C I |org-clock-in-last
+a o C c |org-clock-cancel
+a o C g |org-clock-goto
+a o C i |org-clock-in
+a o C j |spacemacs/org-clock-jump-to-current-clock
+a o C o |org-clock-out
+a o C r |org-resolve-clocks
+a o f i |org-feed-goto-inbox
+a o f u |org-feed-update-all
+
+
+
+- TODOリスト
+- 時間計測
+  + カウントダウンタイマー
+  + タイマー開始
+- アジェンダ
+
+```org
+sc* 
+```
+
+
+C-c C-a         org-attach
+C-c C-b         org-backward-heading-same-level
+C-c C-c         org-ctrl-c-ctrl-c
+C-c C-d         org-deadline
+C-c C-e         org-export-dispatch
+C-c C-f         org-forward-heading-same-level
+C-c TAB         org-ctrl-c-tab
+C-c C-j         org-goto
+C-c C-k         org-kill-note-or-show-branches
+C-c C-l         org-insert-link
+C-c RET         org-ctrl-c-ret
+C-c C-o         org-open-at-point
+C-c C-q         org-set-tags-command
+C-c C-r         org-reveal
+C-c C-s         org-schedule
+C-c C-t         org-todo
+C-c C-v         Prefix Command
+C-c C-w         org-refile
+  (that binding is currently shadowed by another mode)
+C-c C-x         Prefix Command
+C-c C-y         org-evaluate-time-range
+C-c C-z         org-add-note
+C-c ESC         Prefix Command
+C-c C-^         org-up-element
+C-c C-_         org-down-element
+C-c SPC         org-table-blank-field
+C-c !           org-time-stamp-inactive
+C-c "           Prefix Command
+C-c #           org-update-statistics-cookies
+C-c $           org-archive-subtree
+C-c %           org-mark-ring-push
+C-c &           org-mark-ring-goto
+C-c '           org-edit-special
+C-c *           org-ctrl-c-star
+C-c +           org-table-sum
+C-c ,           org-priority
+C-c -           org-ctrl-c-minus
+C-c .           org-time-stamp
+C-c /           org-sparse-tree
+C-c :           org-toggle-fixed-width
+C-c ;           org-toggle-comment
+C-c <           org-date-from-calendar
+C-c =           org-table-eval-formula
+C-c >           org-goto-calendar
+C-c ?           org-table-field-info
+C-c @           org-mark-subtree
+C-c [           org-agenda-file-to-front
+C-c \           org-match-sparse-tree
+C-c ]           org-remove-file
+C-c ^           org-sort
+C-c `           org-table-edit-field
+C-c {           org-table-toggle-formula-debugger
+C-c |           org-table-create-or-convert-from-region
+C-c }           org-table-toggle-coordinate-overlays
+C-c ~           org-table-create-with-table.el
+C-c C-*         org-list-make-subtree
+C-c C-,         org-insert-structure-template
+
+
+## ドキュメント
+
+- [Swiper(ivy/counsel)](https://oremacs.com/swiper/)
+- [Projectile](https://docs.projectile.mx/en/latest/)
+
+## マイナーモード
+
+標準ではオフになっているが任意でオンにするモード
+
+| mode                                                                          | description                                          |
+| ----                                                                          | -----------                                          |
+| [aggressive-indent-mode](https://github.com/Malabarba/aggressive-indent-mode) | コードを常にインデントし続け変更のたびに再インデント |
+| whitespace-mode                                                               | 空白の表示設定                                       |
+|                                                                               |                                                      |
+|                                                                               |                                                      |
+
+
+## spacemacs.env
+
+```shell
+sed -i '.bak' "s|^PATH=.*|PATH=$PATH|" .spacemacs.d/.spacemacs.env
+```
+
+```elisp
+(spacemacs/load-spacemacs-env)
+```
