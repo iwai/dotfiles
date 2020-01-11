@@ -25,8 +25,10 @@ tap "jesseduffield/lazydocker"
 brew "lazydocker"
 
 # spacemacs
-tap "d12frosted/emacs-plus"
-brew "d12frosted/emacs-plus/emacs-plus"
+# tap "d12frosted/emacs-plus"
+# brew "d12frosted/emacs-plus/emacs-plus"
+tap "railwaycat/emacsmacport"
+brew "emacs-mac"
 
 cask "iterm2"
 cask "vagrant"
