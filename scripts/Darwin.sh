@@ -6,6 +6,8 @@ set -euo pipefail
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+cd $(dirname $0)
+
 brew bundle
 
 EMACS_APP=$(brew --prefix emacs-plus)/Emacs.app

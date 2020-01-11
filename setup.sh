@@ -3,7 +3,7 @@
 set -euo pipefail
 
 : ${DOTFILES_DIR:=${HOME}/._dotfiles}
-BACKUP_DIR=${DOTFILES_DIR}/._backup
+BACKUP_DIR=${DOTFILES_DIR}/._backup/$(date +%Y%m%d)
 SCRIPTS_DIR=${DOTFILES_DIR}/scripts
 
 # git clone https://github.com/iwai/dotfiles.git ${DOTFILES_DIR}
@@ -18,7 +18,7 @@ for dotfile in .*; do
         .|..|.git|.gitmodules|.gitignore|._backup)
             ;;
         *)
-            if [ -e "${HOME}/$dotfile" ]; then
+            if [ ! -L "${HOME}/$dotfile" ]; then
                 echo -n "Backup "
                 mv -nfv ${HOME}/$dotfile ${BACKUP_DIR}
             fi

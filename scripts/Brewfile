@@ -8,6 +8,7 @@ brew "tmux"
 brew "peco"
 brew "tree"
 brew "ripgrep"
+brew "fzf"
 
 brew "hub"
 brew "git-secrets"
@@ -29,7 +30,7 @@ brew "d12frosted/emacs-plus/emacs-plus"
 
 cask "iterm2"
 cask "vagrant"
-cask "virtualbox"
+#cask "virtualbox"
 cask "docker"
 
 cask "gpg-suite"
