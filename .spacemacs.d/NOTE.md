@@ -275,12 +275,12 @@ Emacs-Lispは有効になっていなかったので追加する `(spacemacs/add
 
 ### Reference
 
-- https://pxaka.tokyo/wiki/emacs:org-tree-slide
 - https://github.com/org-mode-doc-ja/org-ja
 - https://takaxp.github.io/org-ja.html
 - https://sfus.net/blog/2018/12/org-mode-with-ox-hugo/
 - https://qiita.com/takaxp/items/6b2d1e05e7ce4517274d
 - https://github.com/takaxp/emacs.d/blob/d4fb1e356b93a8b236468fdbc30390a2ceaaac04/init-org.el
+- https://pxaka.tokyo/wiki/emacs:org-tree-slide
 
 
 

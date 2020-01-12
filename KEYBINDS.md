@@ -105,6 +105,13 @@ bind \n peco_change_directory
 
 ## tmux
 
+Frequently used keybinds
+
+|C-T s|choose-tree|
+|C-T w|choose-tree|
+|C-T =|choose-tree|
+
+
 `tmux list-keys`
 
 bind-key    -T prefix       s                 choose-tree -Zs
