@@ -5,6 +5,9 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 export PATH=/usr/local/sbin:$PATH
 
+# default: export LSCOLORS="exfxcxdxbxegedabagacad"
+export LSCOLORS="Exfxcxdxbxegedabagacad"
+
 export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 export LANGUAGE=ja_JP.UTF-8

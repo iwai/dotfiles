@@ -7,3 +7,7 @@ function relogin
     set -g PATH ''
     exec $SHELL -l
 end
+
+function ls --description 'List contents of directory'
+    command ls -FG $argv
+end
