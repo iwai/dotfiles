@@ -29,3 +29,9 @@ export WD_ROOT=~/Workspace
 
 export GOBIN=~/go/bin
 export PATH=$GOBIN:$PATH
+
+# extended for your job, append or override in your .profile.local
+if [ -e "${HOME}/.profile.local" ]
+then
+    source "${HOME}/.profile.local"
+fi
