@@ -51,7 +51,7 @@ This function should only modify configuration layer settings."
      javascript
 
      python
-     ruby
+     (ruby :variables ruby-version-manager 'rbenv)
      php
      (go :variables
          go-tab-width 4
