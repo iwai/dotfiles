@@ -659,6 +659,7 @@ you should place your code here."
   (setq spaceline-org-clock-p t)
 
   (spacemacs|hide-lighter rainbow-mode)
+  (dumb-jump-mode 1)
 
   )
 
