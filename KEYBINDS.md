@@ -107,10 +107,10 @@ bind \n peco_change_directory
 
 Frequently used keybinds
 
-|C-T s|choose-tree|
-|C-T w|choose-tree|
-|C-T =|choose-tree|
-
+|C-t s|choose-tree|
+|C-t w|choose-tree|
+|C-t =|choose-buffer|
+|C-t M-4|select-layout main-vertical|
 
 `tmux list-keys`
 
