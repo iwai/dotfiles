@@ -155,6 +155,7 @@ Each entry is either:
     :post-config
     (progn
       (setq lsp-ui-sideline-enable nil)
+      (setq lsp-ui-doc-enable nil)
       )))
 
 (defun my-defaults/post-init-go-mode ()
