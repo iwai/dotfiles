@@ -10,6 +10,12 @@ end
 
 source $XDG_CONFIG_HOME/fish/keybindings.fish
 
+if [ -e "$XDG_CONFIG_HOME/fish/extend" ]
+    for file in $XDG_CONFIG_HOME/fish/extend/*.fish
+        source $file
+    end
+end
+
 # appearance
 set theme_date_format "+%m/%d %H:%M:%S "
 

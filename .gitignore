@@ -1,5 +1,6 @@
 ._backup/
 
+.config/fish/extend
 .config/fish/functions/
 .config/fish/completions/
 .config/fish/conf.d/
