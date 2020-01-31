@@ -12,3 +12,7 @@ fi
 if test -n "$INSIDE_EMACS" && test -z "$BASH_EXECUTION_STRING"; then
     exec fish
 fi
+
+if [ -f ~/.anyenv-init-bash ]; then
+    source ~/.anyenv-init-bash
+fi
