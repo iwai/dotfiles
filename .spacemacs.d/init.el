@@ -661,6 +661,7 @@ you should place your code here."
   (add-hook 'term-mode-hook #'eterm-256color-mode)
 
   (setq spaceline-org-clock-p t)
+  (setq org-default-notes-file "notes.org")
 
   (spacemacs|hide-lighter rainbow-mode)
   (dumb-jump-mode 1)
