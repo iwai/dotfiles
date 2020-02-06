@@ -55,7 +55,7 @@ This function should only modify configuration layer settings."
            ruby-version-manager 'rbenv
            ruby-backend 'lsp
            ruby-test-runner 'rspec)
-     php
+     (php :variables php-backend 'lsp)
      (go :variables
          go-tab-width 4
          go-backend 'lsp
