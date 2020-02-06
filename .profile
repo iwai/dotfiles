@@ -23,7 +23,7 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 export FZF_TMUX=1
 export FZF_DEFAULT_COMMAND='rg --no-ignore --files'
-export FZF_DEFAULT_OPTS='--height 40% --reverse --margin=0,1 --color=dark,bg+:240 --bind=ctrl-v:page-down,alt-v:page-up'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --margin=0,1 --color=dark,bg+:240 --bind=ctrl-v:page-down,alt-v:page-up --no-sort'
 
 export WD_ROOT=~/Workspace
 
