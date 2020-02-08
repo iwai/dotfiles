@@ -23,3 +23,9 @@
 # function gofmt -d 'gofmt on docker'
 #     _go_docker 'gofmt' $argv
 # end
+function docker-instant -d 'One time docker run to shell'
+    set -q cmd $argv[2]
+    or set cmd '/bin/bash'
+
+    command docker run --rm -it $argv[1] $cmd
+end
