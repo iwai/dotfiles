@@ -57,7 +57,7 @@ This function should only modify configuration layer settings."
      ruby-on-rails
      python
 
-     php
+     (php :variables php-backend 'lsp)
      (go :variables
          go-tab-width 4
          go-backend 'lsp
