@@ -23,6 +23,13 @@
 # function gofmt -d 'gofmt on docker'
 #     _go_docker 'gofmt' $argv
 # end
+
+function mongo-cli -d 'mongo CLI'
+    command docker run --rm -it --net equalizer_default \
+        --name mongo mongo:2.6.7 mongo $argv
+end
+
+
 function docker-instant -d 'One time docker run to shell'
     set -q cmd $argv[2]
     or set cmd '/bin/bash'
