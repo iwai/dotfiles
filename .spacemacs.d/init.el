@@ -50,11 +50,13 @@ This function should only modify configuration layer settings."
      yaml
      javascript
 
-     python
      (ruby :variables
            ruby-version-manager 'rbenv
            ruby-backend 'lsp
            ruby-test-runner 'rspec)
+     ruby-on-rails
+     python
+
      php
      (go :variables
          go-tab-width 4
