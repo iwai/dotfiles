@@ -113,6 +113,7 @@ This function should only modify configuration layer settings."
      editorconfig
      rainbow-mode
      ripgrep
+     langtool
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -669,6 +670,9 @@ you should place your code here."
   (dumb-jump-mode 1)
 
   (setq ruby-insert-encoding-magic-comment nil)
+
+  (setq langtool-default-language "en-US")
+  (setq langtool-bin "/usr/local/bin/languagetool")
 
   )
 
