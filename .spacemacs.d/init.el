@@ -616,6 +616,8 @@ you should place your code here."
     )
   
   (setq persistent-scratch-save-file "~/.spacemacs.d/.persistent-scratch")
+  (setq persistent-scratch-backup-directory "~/.spacemacs.d/.persistent-scratch-backup")
+
   (persistent-scratch-setup-default)
 
   (setq projectile-project-search-path (list (getenv "WD_ROOT")))
