@@ -36,3 +36,12 @@ function docker-instant -d 'One time docker run to shell'
 
     command docker run --rm -it $argv[1] $cmd
 end
+
+# http://interconnectit.com/products/search-and-replace-for-wordpress-databases/
+function wp-srdb -d 'Database Search and Replace Script'
+    argparse 'n/net=+' -- $argv
+    or return
+
+    command docker run --rm -it --net $_flag_net \
+    --name wp-srdb thedxw/srdb srdb $argv
+end
