@@ -48,3 +48,10 @@ function man -d 'Colored man page'
 
 end
 
+function uridecode -d 'URI decode'
+    ruby -r cgi -ne 'print CGI.unescape $_'
+end
+
+function uriencode -d 'URI encode'
+    ruby -r cgi -ne 'print CGI.escape $_'
+end
