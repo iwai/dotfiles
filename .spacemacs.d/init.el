@@ -601,7 +601,12 @@ you should place your code here."
   (define-key evil-emacs-state-map (kbd "C-h") (kbd "<DEL>"))
   (define-key counsel-mode-map (kbd "C-h") (kbd "<DEL>"))
 
-  (define-key evil-emacs-state-map (kbd "C-x C-b") 'projectile-ibuffer)
+  (defun adjust-ibuffer (arg)
+    (interactive "P")
+    (if (projectile-project-root)
+        (projectile-ibuffer arg)
+      (ibuffer arg)))
+  (define-key evil-emacs-state-map (kbd "C-x C-b") 'adjust-ibuffer)
 
   ;; https://github.com/abo-abo/swiper/issues/1525
   ;; counsel-file-jump は非同期じゃないらしいので counsel-fzf にしてみるの巻き
