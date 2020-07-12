@@ -685,6 +685,7 @@ you should place your code here."
   (setq langtool-default-language "en-US")
   (setq langtool-bin "/usr/local/bin/languagetool")
 
+  (push '("*ripgrep-search*" :stick t) popwin:special-display-config)
   )
 
 (defun dotspacemacs/emacs-custom-settings ()

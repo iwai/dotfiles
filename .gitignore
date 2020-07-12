@@ -12,5 +12,6 @@
 
 .config/direnv/allow/
 .config/anyenv/
+.config/composer/vendor/
 
 .spacemacs.d/.spacemacs.env
