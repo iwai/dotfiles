@@ -55,3 +55,34 @@ end
 function uriencode -d 'URI encode'
     ruby -r cgi -ne 'print CGI.escape $_'
 end
+
+function archive -d 'Archive directory'
+    set src_dir (string replace -r '/$' '' $argv[1])
+    set -e argv[1]
+
+    [ ! -d $src_dir ]
+    and echo $_: \'$src_dir\' is not a directory
+    and return 1
+
+    if [ -e "$src_dir.tar.gz" ]
+        confirm --message "override $src_dir.tar.gz?"
+        or return 0
+    end
+
+    if ! command -v pv &> /dev/null
+        echo $_: pv was not found.
+        return 1
+    end
+
+    set size (expr (command du -sk $src_dir | awk '{print $1}') "*" 1024)
+
+    command tar cf - $src_dir | pv -s $size | gzip > $src_dir.tar.gz
+    or return $status
+
+    confirm --message "remove $src_dir?"
+    or return 0
+
+    rm -rf $src_dir
+
+    return 0
+end
