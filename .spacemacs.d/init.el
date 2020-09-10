@@ -32,8 +32,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(typescript
-     themes-megapack
+   '(themes-megapack
 
      lsp
      dap
@@ -45,9 +44,13 @@ This function should only modify configuration layer settings."
 
      sql
      markdown
-     html
      yaml
+
+     (html :variables
+           html-enable-lsp t
+           css-enable-lsp t)
      javascript
+     typescript
 
      (ruby :variables
            ruby-version-manager 'rbenv
@@ -69,6 +72,8 @@ This function should only modify configuration layer settings."
          godoc-at-point-function 'godoc-gogetdoc
          )
      rust
+
+     windows-scripts
 
      docker
 
@@ -97,6 +102,11 @@ This function should only modify configuration layer settings."
 
      (multiple-cursors :variables
                        multiple-cursors-backend 'mc)
+
+     (treemacs :variables
+               treemacs-use-icons-dired nil
+               treemacs-follow-mode -1
+               treemacs-use-scope-type 'Perspectives)
 
      ;; -- private layers
      my-posframe
@@ -714,6 +724,8 @@ you should place your code here."
 
   (setq langtool-default-language "en-US")
   (setq langtool-bin "/usr/local/bin/languagetool")
+
+  (setq web-mode-markup-indent-offset 2)
 
   )
 
