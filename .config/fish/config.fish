@@ -1,6 +1,10 @@
 
 if status --is-login
     source $XDG_CONFIG_HOME/fish/env.fish
+
+    for file in $XDG_CONFIG_HOME/fish/env.d/*.fish
+        source $file
+    end
 end
 
 # loading source
@@ -40,7 +44,7 @@ function fish_greeting -d "What's up, fish?"
         set outdated (brew outdated | wc -l | tr -d [\:blank\:])
         echo -n "Homebrew outdated: "
         set_color yellow; echo -n $outdated
-        set_color $fish_color_autosuggestion; echo -n " packages. more infomation `brew outdated`."
+        set_color $fish_color_autosuggestion; echo " packages. more infomation `brew outdated`."
     end
 
     set_color normal
