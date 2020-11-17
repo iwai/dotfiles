@@ -3,3 +3,8 @@ source ~/.profile
 
 # Load .bashrc, containing non-login related bash initializations.
 source ~/.bashrc
+
+
+if [ -z "$BASH_EXECUTION_STRING" ]; then
+    exec fish
+fi
