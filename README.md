@@ -44,6 +44,9 @@ composer run-script --working-dir=vendor/felixfbecker/language-server parse-stub
 
 ## Clean-up `PATH` variable
 
+Bashからfishを起動する場合、それぞれで path\_helper が実行されるため、 .profile や .bash\_profile で設定した内容が、変更されおかしくなる問題を回避するため
+path\_helper 実行前に一度、掃除してから実行するようにする
+
 ```
 # System-wide .profile for sh(1)
 
@@ -58,3 +61,8 @@ fi
 ```
 
 http://www.softec.lu/site/DevelopersCorner/MasteringThePathHelper
+
+
+## Xcode Command line tools
+
+Install from https://developer.apple.com/download/more/
