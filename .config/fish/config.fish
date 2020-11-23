@@ -41,10 +41,14 @@ function fish_greeting -d "What's up, fish?"
     and uptime
 
     if command -q -s brew
-        set outdated (brew outdated | wc -l | tr -d [\:blank\:])
+        set -l clength (expr $COLUMNS / 3)
+        set -l outdated (brew outdated | wc -l | tr -d [\:blank\:])
+        set -l frequently_packages (brew outdated -v | grep -E '^(?:anyenv|docker|fish|fzf|hub|jq|packer|ranger|ripgrep|tig|tmux|ngrok|vagrant)' | lam -f -$clength - -f -$clength - -f -$clength - 2>/dev/null)
+
         echo -n "Homebrew outdated: "
         set_color yellow; echo -n $outdated
         set_color $fish_color_autosuggestion; echo " packages. more infomation `brew outdated`."
+        echo $frequently_packages
     end
 
     set_color normal
