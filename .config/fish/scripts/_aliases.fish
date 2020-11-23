@@ -3,6 +3,8 @@ alias g    'git'
 alias tree 'tree -CF'
 alias less 'less -R'
 
+alias j    'z'
+
 function relogin
     set -g PATH ''
     exec $SHELL -l
