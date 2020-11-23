@@ -5,6 +5,10 @@ if status --is-login
     for file in $XDG_CONFIG_HOME/fish/env.d/*.fish
         source $file
     end
+
+    for file in /usr/local/share/fish/vendor_completions.d/*.fish
+        source $file
+    end
 end
 
 # loading source
