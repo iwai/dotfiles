@@ -37,8 +37,9 @@ end
 
 
 function fish_greeting -d "What's up, fish?"
-    [ ! -z $TMUX ]
-    and return
+    if ! test -z $TMUX
+        return
+    end
 
     set_color $fish_color_autosuggestion
     uname -nmsr
