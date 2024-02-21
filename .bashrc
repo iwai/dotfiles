@@ -25,3 +25,8 @@ fi
 if [ -n "$INSIDE_EMACS" -a -z "$BASH_EXECUTION_STRING" ]; then
     exec fish
 fi
+
+
+alias awsssh='instance_ip=$(ls-hosts -noheader -filters instance-state-name:running -fields private-ip,tag:Name,instance-id | peco --prompt "Connect to >" | awk -F'\''[ ,\t]'\'' '\''{print $1}'\''); echo "ssh to $instance_ip"; ssh $instance_ip'
+alias awsssh-jp='instance_ip=$(ls-hosts -noheader --region=ap-northeast-1 -filters instance-state-name:running -fields private-ip,tag:Name,instance-id | peco --prompt "Connect to >" | awk -F'\''[ ,\t]'\'' '\''{print $1}'\''); echo "ssh to $instance_ip"; ssh $instance_ip'
+
