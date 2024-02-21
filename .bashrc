@@ -8,6 +8,15 @@ if [ -f ~/.bash_functions ]; then
 fi
 
 if [ -f ~/.anyenv-init-bash -a -z "$BASH_EXECUTION_STRING" ]; then
+    # ref: https://zenn.dev/antyuntyun/articles/pyenv_warning_resolve
+    if [ -f "$HOME/.anyenv/envs/pyenv" ]; then
+        export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init --path)"
+        if command -v pyenv 1>/dev/null 2>&1; then
+            eval "$(pyenv init -)"
+        fi
+    fi
     source ~/.anyenv-init-bash
 fi
 
