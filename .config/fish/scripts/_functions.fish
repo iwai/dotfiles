@@ -86,3 +86,29 @@ function archive -d 'Archive directory'
 
     return 0
 end
+
+function wget-page -d 'Save a single web page'
+    wget -o wget-page.log -q --show-progress --page-requisites --adjust-extension --no-host-directories --convert-links -e robots=off $argv
+    echo logged wget-page.log
+
+    confirm --message "remove query string from filename?"
+    or return 0
+
+    for f in (find . -type f -name "*\?*")
+        set filename (echo $f | cut -d \? -f1)
+        echo $f $filename
+        mv $f $filename
+    end
+end
+
+function ffmpeg-mov2mp4 -d 'Convert mov file to mpeg4'
+    set srcfile $argv[1]
+    set -e argv[1]
+    set destfile (string replace -r '.mov$' '.mp4' $srcfile)
+
+    command ffmpeg -loglevel quiet -stats -i $srcfile -vcodec h264 -acodec aac $destfile
+    or return $status
+end
+
+# function tidy-pp
+# tidy -q -w 0 -ashtml 2>/dev/null

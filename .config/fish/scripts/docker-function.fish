@@ -29,6 +29,19 @@ function mongo-cli -d 'mongo CLI'
         --name mongo mongo:2.6.7 mongo $argv
 end
 
+function httpd-docker-run -d 'Run apache server'
+    argparse 'p/port=+' -- $argv
+    or return
+
+    $_flag_port
+
+    docker run -p 80:80 -it --rm -v (pwd):/var/www/html -v $HOME/._dotfiles/.config/fish/misc/httpd.conf:/etc/apache2/sites-enabled/apache2.conf php:7-apache
+    /Users/iwai/._dotfiles/.config/fish/misc/httpd.conf
+end
+
+function docker-clean-images -d 'Remove <none> images'
+    docker rmi (docker images -f "dangling=true" -q)
+end
 
 function docker-instant -d 'One time docker run to shell'
     set -q cmd $argv[2]
@@ -44,4 +57,11 @@ function wp-srdb -d 'Database Search and Replace Script'
 
     command docker run --rm -it --net $_flag_net \
     --name wp-srdb thedxw/srdb srdb $argv
+end
+
+function mysql-import -d 'Import for docker mysql'
+    argparse 'n/net=+' 'f/file=+' 'd/database=+' -- $argv
+    or return
+
+    command cat $_flag_file | docker run -i --rm --network $_flag_net mysql:5.6 mysql -h mysql -u root -ppassword $_flag_database
 end
