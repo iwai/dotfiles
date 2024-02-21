@@ -53,3 +53,4 @@ function s:RemoveNetrwhist()
     endif
 endfunction
 autocmd VimLeave * call s:RemoveNetrwhist()
+

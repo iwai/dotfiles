@@ -23,14 +23,16 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 export FZF_TMUX=1
 export FZF_DEFAULT_COMMAND='rg --no-ignore --files'
-export FZF_DEFAULT_OPTS='--height 40% --reverse --margin=0,1 --color=dark,bg+:240 --bind=ctrl-v:page-down,alt-v:page-up --no-sort'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --margin=0,1 --color=dark,bg+:240 --bind=ctrl-v:page-down,alt-v:page-up,ctrl-k:kill-line --no-sort'
 
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
+export XMLLINT_INDENT="    "
+
 export WD_ROOT=~/Workspace
 
-export GOBIN=~/go/bin
-export PATH="$GOBIN:$PATH"
+#export GOBIN=~/go/bin
+#export PATH="$GOBIN:$PATH"
 
 # extended for your job, append or override in your .profile.local
 if [ -e "${HOME}/.profile.local" ]

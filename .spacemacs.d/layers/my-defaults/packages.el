@@ -45,7 +45,7 @@
     org
     markdown-mode
     yasnippet
-    treemacs
+;;    treemacs
     lsp-ui
     go-mode
     )
@@ -91,8 +91,8 @@ Each entry is either:
       ;; 範囲指定されている文字列を検索
       (define-key evil-emacs-state-map (kbd "C-s") 'my/swiper-region)
       (define-key evil-emacs-state-map (kbd "C-r") 'my/swiper-region)
-
-      ;; https://github.com/abo-abo/swiper/issues/2137
+      ;; (define-key evil-emacs-state-map (kbd "C-s") 'swiper-thing-at-point)
+      ;; ;; https://github.com/abo-abo/swiper/issues/2137
       (define-key ivy-minibuffer-map (kbd "C-r") 'ivy-previous-line-or-history)
 
       )))
@@ -143,12 +143,12 @@ Each entry is either:
 
       )))
 
-(defun my-defaults/post-init-treemacs ()
-  (spacemacs|use-package-add-hook treemacs
-    :post-config
-    (progn
-      (treemacs-follow-mode -1)
-      )))
+;; (defun my-defaults/post-init-treemacs ()
+;;   (spacemacs|use-package-add-hook treemacs
+;;     :post-config
+;;     (progn
+;;       (treemacs-follow-mode -1)
+;;       )))
 
 (defun my-defaults/post-init-lsp-ui ()
   (spacemacs|use-package-add-hook lsp-ui
